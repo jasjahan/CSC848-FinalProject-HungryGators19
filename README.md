@@ -15,7 +15,7 @@
 
 | Student Name | Student Email | GitHub Username |
 |    :---:     |     :---:     |     :---:       |
-| member1      |               |                 |
+| member1      | robertfreeman6092@gmail.com| RobertAldenFreeman
 | member2      |               |                 |
 | member3      |               |                 |
 | member4      |               |                 |
