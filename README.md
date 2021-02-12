@@ -16,7 +16,7 @@
 | Student Name | Student Email | GitHub Username |
 |    :---:     |     :---:     |     :---:       |
 |Robert Freeman     | robertfreeman6092@gmail.com| RobertAldenFreeman
-| member2      |               |                 |
+|Branden Nguyen     | bnguye11@mail.sfsu.edu     | branden-nguyen24                |
 | member3      |               |                 |
 | member4      |               |                 |
 | member5      |               |                 |
