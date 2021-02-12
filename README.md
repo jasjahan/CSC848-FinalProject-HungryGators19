@@ -18,7 +18,7 @@
 |Robert Freeman     | robertfreeman6092@gmail.com| RobertAldenFreeman
 |Branden Nguyen     | bnguye11@mail.sfsu.edu     | branden-nguyen24                |
 | MST Jasmine Jahan    |        mjahan@mail.sfsu.edu       |      jasjahan           |
-| member4      |               |                 |
+| Tin Thu Zar Aye      | taye1@mail.sfsu.edu              | TinThuZarAye-mm                 |
 | member5      |               |                 |
 | member6      |               |                 |
 
