@@ -17,7 +17,7 @@
 |    :---:     |     :---:     |     :---:       |
 |Robert Freeman     | robertfreeman6092@gmail.com| RobertAldenFreeman
 |Branden Nguyen     | bnguye11@mail.sfsu.edu     | branden-nguyen24                |
-| member3      |        mjahan@mail.sfsu.edu       |      jasjahan           |
+| MST Jasmine Jahan    |        mjahan@mail.sfsu.edu       |      jasjahan           |
 | member4      |               |                 |
 | member5      |               |                 |
 | member6      |               |                 |
