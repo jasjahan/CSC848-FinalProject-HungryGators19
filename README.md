@@ -19,7 +19,7 @@
 |Branden Nguyen     | bnguye11@mail.sfsu.edu     | branden-nguyen24                |
 | MST Jasmine Jahan    |        mjahan@mail.sfsu.edu       |      jasjahan           |
 | Tin Thu Zar Aye      | taye1@mail.sfsu.edu              | TinThuZarAye-mm                 |
-| member5      |               |                 |
+| Yongjian Pan     |  ypan5@mail.sfsu.edu             |  ypan710               |
 | member6      |               |                 |
 
 ## NO code needs to be stored in the root of your repository. You may rename the application folder if you like to your team's application name. But all source code related to your team's application should be stored inside the application folder. 
