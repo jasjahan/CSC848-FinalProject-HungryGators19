@@ -3,7 +3,7 @@
 - [ ] About
 
 - [x] Rob
-- [ ] Singh
+- [X] Singh (Intro.html)
 - [ ] Jian
 - [ ] Brendan
 - [ ] Jasmine
