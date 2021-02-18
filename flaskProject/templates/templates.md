@@ -1,4 +1,4 @@
-# All of our website pages will go here (.html)
+# All of our website templates will go here (.html)
 - [ ] Homepage
 - [ ] About
 
