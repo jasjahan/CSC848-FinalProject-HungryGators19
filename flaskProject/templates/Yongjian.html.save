@@ -1,6 +1,7 @@
+
 <html lang="en">
 <head>
-<title>Yongjian Pan</title>
+<title>Branden J. Nguyen</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -62,30 +63,42 @@ article {
   <nav>
     <ul>
 
+      
 
     </ul>
   </nav>
 
   <article>
     <h2>Yongjian Pan</h2>
-    <div>
+    <p >Hi, my name is Yongjian Pan. I'm currently a software engineer in-traini>
+          software engineering class learning and integrating Amazon AWS, MySQL, NGIN>
+          and develop a team final project</p>
+</section>
+
+<footer <p>@Yongjian Pan</p>
+</footer>
+
+      <div>
           <p>Hi, my name is Yongjian Pan. I'm currently a software engineer in-training taking a
           software engineering class learning and integrating Amazon AWS, MySQL, NGINX, Python, and Flask to build
           and develop a team final project.</p>
         </div>
         <div>
-          <p>I'm currently working on a software team project (in teams of 6 students) where I engage
+          <p class="lead">I'm currently working on a software team project (in teams of 6 students) where I engage
           in a team project in order to experience and practice key aspects of full software engineering lifecycle
           in settings that simulates small software engineering company.</p>
         </div>
-      </div>
-</section>
-
-<footer>
-  <p>@Yongjian Pan</p>
-</footer>
-
-
 </body>
 </html>
 
+
+<!DOCTYPE htm>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <header>
+ 
