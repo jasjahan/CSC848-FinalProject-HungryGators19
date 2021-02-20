@@ -1,0 +1,104 @@
+
+<html lang="en">
+<head>
+<title>Branden J. Nguyen</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+
+body {
+ background-color: #ECF6FB;
+}
+
+/* Style the header */
+header {
+  text-align: left;
+  font-size: 35px;
+  color: #554539;
+}
+
+/* Container for flexboxes */
+section {
+  display: -webkit-flex;
+  display: flex;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  padding: 0;
+}
+
+/* Style the content */
+article {
+  color: #554539;
+  padding: 75px;
+  font-size: 25px;
+
+}
+
+ footer {
+  padding: 20px;
+  text-align: left;
+  color: #554539;
+}
+
+@media (max-width: 600px) {
+  section {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <h2>Introduction:</h2>
+</header>
+
+<section>
+  <nav>
+    <ul>
+
+      
+
+    </ul>
+  </nav>
+
+  <article>
+    <h2>Yongjian Pan</h2>
+    <p >Hi, my name is Yongjian Pan. I'm currently a software engineer in-traini>
+          software engineering class learning and integrating Amazon AWS, MySQL, NGIN>
+          and develop a team final project</p>
+</section>
+
+<footer <p>@Yongjian Pan</p>
+</footer>
+
+      <div>
+          <p>Hi, my name is Yongjian Pan. I'm currently a software engineer in-training taking a
+          software engineering class learning and integrating Amazon AWS, MySQL, NGINX, Python, and Flask to build
+          and develop a team final project.</p>
+        </div>
+        <div>
+          <p class="lead">I'm currently working on a software team project (in teams of 6 students) where I engage
+          in a team project in order to experience and practice key aspects of full software engineering lifecycle
+          in settings that simulates small software engineering company.</p>
+        </div>
+</body>
+</html>
+
+
+<!DOCTYPE htm>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <header>
+ 

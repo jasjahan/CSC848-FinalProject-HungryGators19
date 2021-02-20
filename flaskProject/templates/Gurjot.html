@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+<title>Introduction</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+
+body {
+ background-color: #ECF6FB;
+}
+
+/* Style the header */
+header {
+  text-align: left;
+  font-size: 35px;
+  color: #554539;
+}
+
+/* Container for flexboxes */
+section {
+  display: -webkit-flex;
+  display: flex;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  padding: 0;
+}
+
+/* Style the content */
+article {
+  color: #554539;
+  padding: 75px;
+  font-size: 25px;
+
+}
+
+ footer {
+  padding: 20px;
+  text-align: left;
+  color: #554539;
+}
+
+@media (max-width: 600px) {
+  section {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <h2>Introduction:</h2>
+</header>
+
+<section>
+  <nav>
+    <ul>
+
+      <img src="{{ url_for('static', filename='MyPic.jpg') }}" alt="Pic" style="width:325px;height:550px;">
+
+    </ul>
+  </nav>
+
+  <article>
+    <h2>Gurjot Singh</h2>
+    <p > I am a student in San Francisco State University and my major is Computer Science.</p>
+</section>
+
+<footer>
+  <p>@Gurjot Singh</p>
+</footer>
+
+
+</body>
+</html>
