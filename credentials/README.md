@@ -26,6 +26,9 @@ Command to start server: ssh -i "team2.pem" ubuntu@ec2-18-223-160-96.us-east-2.c
 
 URL: http://18.223.160.96:5000/ (No https!)
 
+To access mysql: mysql -u team1 -p
+Password: 12345678
+
 
 # Most important things to Remember
 ## These values need to kept update to date throughout the semester. <br>
