@@ -20,6 +20,13 @@
 7. Database name (basically the name that contains all your tables)
 8. Instructions on how to use the above information.
 
+Command to make pem key accessible: sudo chmod 400 ./team2.pem
+
+Command to start server: ssh -i "team2.pem" ubuntu@ec2-18-223-160-96.us-east-2.compute.amazonaws.com
+
+URL: http://18.223.160.96:5000/ (No https!)
+
+
 # Most important things to Remember
 ## These values need to kept update to date throughout the semester. <br>
 ## <strong>Failure to do so will result it points be deducted from milestone submissions.</strong><br>
