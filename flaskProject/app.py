@@ -35,5 +35,14 @@ def Jasmine():
 def TinThuZar():
   return render_template("TinThuZar.html")
 
+@app.route("/base")
+def base():
+  return render_template("base.html")
+
+@app.route("/homepage")
+def homepage():
+  return render_template("homepage.html")
+
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", debug=True)
+    app.run(debug=True)
+
