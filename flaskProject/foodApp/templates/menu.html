@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-
+        scale=1">
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-
+        awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/static/index.css">
+    </head>
+    <header>
+        <a href="/add_entry">Add entry</a>
+{#        <a href="/delete">Delete Menu</a>#}
+        <a href="/">Main page</a>
+    </header>
+    <body>
+        <h1><center>Menu List for {{ name }}</center></h1>
+        <ul>
+            {% for menu in menus %}
+                <center>
+                    <p>
+                        Entry: {{ menu.name }},
+                        Price: ${{ menu.price }},
+                        Quantity: {{ menu.quantity }}
+{#                        <form method="post" action="/delete_entry">#}
+{#                        <input type="hidden" name="restaurant_id" value="{{ restaurant.id }}">#}
+{#                        <input type="hidden" name="restaurant_name" value="{{ restaurant.name }}">#}
+{#                        <button>Delete</button>#}
+{#                    </form>#}
+                    </p>
+                </center>
+            {% endfor %}
+        </ul>
+
+{#        <center>#}
+{#        {% for item in data %}#}
+{#            <tr>#}
+{#                <td> {{item[0]}} by {{item[1]}}</td>#}
+{#                </br>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </center>#}
+    </body>
+</html>
+
