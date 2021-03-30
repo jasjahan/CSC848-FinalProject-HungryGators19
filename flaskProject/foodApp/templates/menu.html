@@ -9,8 +9,7 @@
         <link rel="stylesheet" href="/static/index.css">
     </head>
     <header>
-        <a href="/add_entry">Add entry</a>
-{#        <a href="/delete">Delete Menu</a>#}
+        <a href="/add_entry?name={{ name }}&id={{ id }}">Add entry</a>
         <a href="/">Main page</a>
     </header>
     <body>
@@ -22,11 +21,13 @@
                         Entry: {{ menu.name }},
                         Price: ${{ menu.price }},
                         Quantity: {{ menu.quantity }}
-{#                        <form method="post" action="/delete_entry">#}
-{#                        <input type="hidden" name="restaurant_id" value="{{ restaurant.id }}">#}
-{#                        <input type="hidden" name="restaurant_name" value="{{ restaurant.name }}">#}
-{#                        <button>Delete</button>#}
-{#                    </form>#}
+                        <form method="POST" action="/menu_delete">
+{#                            <input type="number" name="quantity" min="0" max="{{ menu.quantity }}">#}
+                            <input type="hidden" name="restaurant_id" value="{{ id }}">
+                            <input type="hidden" name="restaurant_name" value="{{ name }}">
+                            <input type="hidden" name="menu_id" value="{{ menu.id }}">
+                            <button>X</button>
+                        </form>
                     </p>
                 </center>
             {% endfor %}

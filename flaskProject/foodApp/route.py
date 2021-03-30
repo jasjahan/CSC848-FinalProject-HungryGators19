@@ -9,18 +9,47 @@ route_app = Blueprint('route_app', __name__)
 # endpoint for searching the menu in the menu table in the database
 @route_app.route('/menu', methods=['GET', 'POST'])
 def search_menu():
-    restaurant_name = ""
     if request.method == "POST":
         restaurant_id = request.form['restaurant_id']
         restaurant_name = request.form['restaurant_name']
         result = Menu.query.filter_by(restaurant_id=restaurant_id).all()
         menus = [{
+            "id": row.id,
             "name": row.name,
             "price": row.price,
             "quantity": row.quantity,
         } for row in result]
-        return render_template('menu.html', name=restaurant_name, menus=menus)
-    return render_template('menu.html', name=restaurant_name, menus=[])
+        return render_template('menu.html', name=restaurant_name, id=restaurant_id, menus=menus)
+    elif request.method == "GET":
+        restaurant_name, restaurant_id = request.args.get("name"), request.args.get("id", None)
+        if restaurant_id is not None:
+            result = Menu.query.filter_by(restaurant_id=restaurant_id).all()
+            menus = [{
+                "id": row.id,
+                "name": row.name,
+                "price": row.price,
+                "quantity": row.quantity,
+            } for row in result]
+            return render_template('menu.html', name=restaurant_name, id=restaurant_id, menus=menus)
+        else:
+            return render_template('menu.html', name=restaurant_name, id=restaurant_id, menus=[])
+
+
+@route_app.route('/menu_delete', methods=['POST'])
+def menu_delete():
+    restaurant_id = request.form['restaurant_id']
+    restaurant_name = request.form['restaurant_name']
+    menu_id = request.form['menu_id']
+    Menu.query.filter_by(id=menu_id).delete()
+    db.session.commit()
+    result = Menu.query.filter_by(restaurant_id=restaurant_id).all()
+    menus = [{
+        "id": row.id,
+        "name": row.name,
+        "price": row.price,
+        "quantity": row.quantity,
+    } for row in result]
+    return render_template('menu.html', name=restaurant_name, id=restaurant_id, menus=menus)
 
 
 # endpoint for searching restaurants in the restaurants table in the database
@@ -108,7 +137,8 @@ def remove_restaurant():
 @route_app.route('/add_entry', methods=['GET', 'POST'])
 def add_entry():
     if request.method == 'GET':
-        return render_template('add_entry.html')
+        restaurant_name, restaurant_id = request.args.get("name"), request.args.get("id")
+        return render_template('add_entry.html', name=restaurant_name, id=restaurant_id)
 
     # Because we 'returned' for a 'GET', if we get to this next bit, we must
     # have received a POST
@@ -120,7 +150,8 @@ def add_entry():
     entry_name = request.form.get('name_field')
     entry_price = request.form.get('price_field')
     entry_quantity = request.form.get('quantity_field')
-    restaurant_id = request.form.get('restaurant_id_field')
+    restaurant_id = request.form.get('restaurant_id')
+    restaurant_name = request.form.get('restaurant_name')
 
     entry = create_entry(entry_name, entry_price, entry_quantity, restaurant_id)
-    return render_template('add_entry.html', entry=entry)
+    return render_template('add_entry.html', entry=entry, name=restaurant_name, id=restaurant_id)

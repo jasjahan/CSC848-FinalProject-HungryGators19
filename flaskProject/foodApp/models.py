@@ -38,7 +38,6 @@ class Menu(db.Model):
         self.restaurant_id = restaurant_id
 
 
-
 def create_restaurant(new_name, new_address, new_phone, new_zip):
     # Create a restaurant with the provided input.
     # At first, we will trust the user.

@@ -1,9 +1,9 @@
-<h3>Add Entry</h3>
+<h3>Add Entry for {{ name }}</h3>
 
 {% if entry %}
 
 <p><strong>{{entry.name}}</strong> successfully added! Add another below.</p>
-<p><a href="/menu">Back to Menu</a></p>
+<p><a href="/menu?name={{ name }}&id={{ id }}">Back to Menu</a></p>
 
 {% endif %}
 
@@ -11,25 +11,18 @@
 <!-- The form action and method correspond to a Flask route -->
 <form action="/add_entry" method="POST">
 
-<label for="name_id">Name of entry</label>
-<input id="name_id" name="name_field" type="text"/></br>
+    <label for="name_id">Name of entry</label>
+    <input id="name_id" name="name_field" type="text"/></br>
 
-<label for="price_id">Price</label>
-<input id="price_id" name="price_field" type="text"/></br>
+    <label for="price_id">Price</label>
+    <input id="price_id" name="price_field" type="text"/></br>
 
-<label for="quantity_id">Quantity</label>
-<input id="quantity_id" name="quantity_field" type="text"/></br>
+    <label for="quantity_id">Quantity</label>
+    <input id="quantity_id" name="quantity_field" type="text"/></br>
 
-    <input type="hidden" name="restaurant_id" value="">
+    <input type="hidden" name="restaurant_id" value="{{ id }}">
+    <input type="hidden" name="restaurant_name" value="{{ name }}">
 
-
-<!-- We need a submit button to submit a form! -->
-{#    {% for restaurant in restaurants %}#}
-{#        <form method="post" action="/">#}
-{#            <input type="hidden" name="restaurant_id" value="{{ restaurant.id }}">#}
-{#        </form>#}
-{#    {% endfor %}#}
-<input type="submit" value="Add"/>
-{#<input type="submit" value="Add"/>#}
+    <input type="submit" value="Add"/>
 
 </form>
