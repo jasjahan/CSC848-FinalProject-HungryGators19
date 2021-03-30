@@ -12,3 +12,8 @@
 # where username is the username to your database, password is the password to your database, server is the server of your database, and db = HungryGators-19
 
 # See https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/
+
+
+# 3/29/2021:
+# Backend now able to add and delete entries from menu for each of respective restaurants added to the database.
+# It appears that we may need to implement a login/logout page to distinguish user and restaurant owner and admin because only restaurant owners and admin can delete entries listed from the database, but this M2 VP does not require login/logout...
