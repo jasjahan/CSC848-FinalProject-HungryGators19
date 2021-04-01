@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-
+        scale=1">
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-
+        awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/static/index.css">
+    </head>
+    <header>
+        <a href="/add">Add Restaurant</a>
+        <a href="/delete">Delete Restaurant</a>
+    </header>
+    <body>
+        <h1><center>Restaurant List</center></h1>
+        <ul>
+            {% for restaurant in restaurants %}
+                <center>
+                    {{ restaurant.name }},
+                    {{ restaurant.address }},
+                    {{ restaurant.phone_number }},
+                    {{ restaurant.zip_code }}
+                  	{% if restaurant.image != '' %}
+                  		<br><img src="{{ restaurant.image }}" alt="{{ restaurant.name }} Image" width="200" height="200">
+                  	{% endif %}
+                    <form method="post" action="/menu">
+                        <input type="hidden" name="restaurant_id" value="{{ restaurant.id }}">
+                        <input type="hidden" name="restaurant_name" value="{{ restaurant.name }}">
+                        <button>Show Menu</button>
+                    </form>
+                </center>
+            {% endfor %}
+        </ul>
+        <form class="example" method="post" action="/"
+         style="margin:auto;max-width:600px">
+            <input type="text"
+                   placeholder="Search restaurants or click search to display all results"
+                   name="restaurant">
+            <button type="submit">Search<i class="fa fa-search"></i>
+            </button>
+        </form>
+    </body>
+</html>
+
+
+
