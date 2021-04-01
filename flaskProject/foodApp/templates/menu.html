@@ -22,7 +22,7 @@
                         Price: ${{ menu.price }},
                         Quantity: {{ menu.quantity }}
                         <form method="POST" action="/menu_delete">
-{#                            <input type="number" name="quantity" min="0" max="{{ menu.quantity }}">#}
+{#                          <input type="number" name="quantity" min="0" max="{{ menu.quantity }}">#}
                             <input type="hidden" name="restaurant_id" value="{{ id }}">
                             <input type="hidden" name="restaurant_name" value="{{ name }}">
                             <input type="hidden" name="menu_id" value="{{ menu.id }}">
@@ -32,15 +32,6 @@
                 </center>
             {% endfor %}
         </ul>
-
-{#        <center>#}
-{#        {% for item in data %}#}
-{#            <tr>#}
-{#                <td> {{item[0]}} by {{item[1]}}</td>#}
-{#                </br>#}
-{#            </tr>#}
-{#        {% endfor %}#}
-{#        </center>#}
     </body>
 </html>
 

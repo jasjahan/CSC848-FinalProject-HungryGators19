@@ -1,4 +1,4 @@
-from app import db
+from app_old import db
 from sqlalchemy import ForeignKey
 
 
@@ -12,12 +12,14 @@ class Restaurant(db.Model):
     address = db.Column(db.String(45), nullable=False)
     phone_number = db.Column(db.String(45), nullable=False)
     zip_code = db.Column(db.String(45), nullable=False)
+    image = db.Column(db.String(100), nullable=False)
 
-    def __init__(self, name, address, phone_number, zip_code):
+    def __init__(self, name, address, phone_number, zip_code, image):
         self.name = name
         self.address = address
         self.phone_number = phone_number
         self.zip_code = zip_code
+        self.image = image
 
 
 class Menu(db.Model):
@@ -30,6 +32,7 @@ class Menu(db.Model):
     name = db.Column(db.String(45))
     price = db.Column(db.Float, nullable=False)
     quantity = db.Column(db.Integer)
+    # image = db.Column(db.Text, nullable=False)
 
     def __init__(self, name, price, quantity, restaurant_id):
         self.name = name
@@ -38,12 +41,12 @@ class Menu(db.Model):
         self.restaurant_id = restaurant_id
 
 
-def create_restaurant(new_name, new_address, new_phone, new_zip):
+def create_restaurant(new_name, new_address, new_phone, new_zip, new_image):
     # Create a restaurant with the provided input.
     # At first, we will trust the user.
 
     # This line maps to line 14 above (the Restaurant.__init__ method)
-    restaurant = Restaurant(new_name, new_address, new_phone, new_zip)
+    restaurant = Restaurant(new_name, new_address, new_phone, new_zip, new_image)
 
     # Actually add this restaurant to the database
     db.session.add(restaurant)
@@ -58,7 +61,7 @@ def delete_restaurant(new_name, new_address, new_phone, new_zip):
     # Delete a restaurant with the provided name.
     # At first, we will trust the user.
 
-    # This line deletes the restaurant by name from the database
+    # This line filters the query by restaurant name
     restaurant = Restaurant(new_name, new_address, new_phone, new_zip).query.filter_by(name=new_name).first()
 
     # Actually delete this restaurant from the database

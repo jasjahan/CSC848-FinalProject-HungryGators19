@@ -1,7 +1,12 @@
 from models import Restaurant, create_restaurant, delete_restaurant, Menu, create_entry
 from flask import Blueprint, request, render_template
 from sqlalchemy import or_
-from app import db
+from app_old import db
+import os
+
+
+
+
 
 route_app = Blueprint('route_app', __name__)
 
@@ -35,6 +40,7 @@ def search_menu():
             return render_template('menu.html', name=restaurant_name, id=restaurant_id, menus=[])
 
 
+# endpoint for deleting entries from the menu table in the database
 @route_app.route('/menu_delete', methods=['POST'])
 def menu_delete():
     restaurant_id = request.form['restaurant_id']
@@ -75,14 +81,10 @@ def search_restaurant():
             "name": row.name,
             "address": row.address,
             "phone_number": row.phone_number,
-            "zip_code": row.zip_code
+            "zip_code": row.zip_code,
+            "image": row.image
         } for row in result]
 
-        # # all in the search box will return all the tuples
-        # if len(result) == 0 and restaurant == 'all':
-        #     restaurants = Restaurant.query.all()
-        #     #     conn.commit()
-        #     #     data = cursor.fetchall()
         return render_template('index.html', restaurants=restaurants)
     return render_template('index.html')
 
@@ -99,13 +101,18 @@ def add_restaurant():
     # Get the incoming data from the request.form dictionary.
     # The values on the right, inside get(), correspond to the 'name'
     # values in the HTML form that was submitted.
+    file_path = ""
+    file = request.files["image"]
+    if file.filename != '':
+        file_path = os.path.join(UPLOAD_FOLDER, file.filename)
+        file.save(file_path)
 
     restaurant_name = request.form.get('name_field')
     restaurant_address = request.form.get('address_field')
     restaurant_phone = request.form.get('phone_field')
     restaurant_zip = request.form.get('zip_field')
 
-    restaurant = create_restaurant(restaurant_name, restaurant_address, restaurant_phone, restaurant_zip)
+    restaurant = create_restaurant(restaurant_name, restaurant_address, restaurant_phone, restaurant_zip, file_path)
     return render_template('add_restaurant.html', restaurant=restaurant)
 
 
@@ -155,3 +162,17 @@ def add_entry():
 
     entry = create_entry(entry_name, entry_price, entry_quantity, restaurant_id)
     return render_template('add_entry.html', entry=entry, name=restaurant_name, id=restaurant_id)
+
+
+# # endpoint for uploading an image file
+# @route_app.route('/upload', methods=['GET', 'POST'])
+# def upload_file():
+#     if request.method == 'POST':
+#         pic = request.file['pic']
+#         filename = secure_filename(pic.filename)
+#         mimetype = pic.mimetype
+#         img = Img(img.pic.read(), mimetype=mimetype, name=)
+#         db.session.add(img)
+#         db.commit()
+#
+#     return
