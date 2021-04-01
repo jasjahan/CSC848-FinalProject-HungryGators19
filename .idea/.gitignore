@@ -1,4 +1,5 @@
 # Default ignored files
 /shelf/
 /workspace.xml/
-/.DS_store
+/.DS_store/
+.idea/dbnavigator.xml
