@@ -13,7 +13,7 @@
         <a href="/delete">Delete Restaurant</a>
     </header>
     <body>
-        <h1><center>Restaurant List</center></h1>
+        <h1><center>CSC 648/848 Spring 2021 Team 01</center></h1>
         <ul>
             {% for restaurant in restaurants %}
                 <center>
@@ -32,13 +32,23 @@
                 </center>
             {% endfor %}
         </ul>
-        <form class="example" method="post" action="/"
-         style="margin:auto;max-width:600px">
+        <form class="example" method="post" action="/" style="margin:auto;max-width:600px">
             <input type="text"
                    placeholder="Search restaurants or click search to display all results"
                    name="restaurant">
-            <button type="submit">Search<i class="fa fa-search"></i>
-            </button>
+            <button type="submit">Search<i class="fa fa-search"></i></button></br>
+            <label for="cuisine"><center>Choose a cuisine:</center></label>
+            <center>
+                <select name="cuisine" id="cuisine">
+                    {% for cuisine in ['american', 'asian', 'european', 'african'] %}
+                        {% if "cuisine" in restaurants and cuisine == restaurant.cuisine %}
+                            <option value="{{ cuisine }}" selected>{{ cuisine.capitalize() }}</option>
+                        {% else %}
+                            <option value="{{ cuisine }}">{{ cuisine.capitalize() }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </center>
         </form>
     </body>
 </html>
