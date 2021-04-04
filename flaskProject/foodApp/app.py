@@ -19,7 +19,7 @@ app.jinja_env.filters['quote_plus'] = lambda u: quote_plus(u)
 
 # for sqlalchemy
 DB_USER = 'root'
-DB_PASSWORD = 'sesame80'
+DB_PASSWORD = '1992Pavel*'
 DB_HOST = 'localhost'
 DB_PORT = 3306
 DB_NAME = 'HungryGators-19'
@@ -302,6 +302,11 @@ def add_entry():
 
     entry = create_entry(entry_name, entry_price, entry_quantity, restaurant_id)
     return render_template('add_entry.html', entry=entry, name=restaurant_name, id=restaurant_id)
+
+@app.route('/map', methods=['GET', 'POST'])
+def map_func():
+    if request.method == 'GET':
+        return render_template('map.html')
 
 
 if __name__ == '__main__':
