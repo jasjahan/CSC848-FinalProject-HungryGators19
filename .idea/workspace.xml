@@ -41,21 +41,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac4c9332-d543-44ea-a52a-802f518bcc66" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/flaskProject/foodApp/templates/map.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/map.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/snap-app/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/snap-app/.idea/dataSources/0e5c0e5b-4747-4ffd-bda2-613043810b2c.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/snap-app/.idea/dataSources/0e5c0e5b-4747-4ffd-bda2-613043810b2c/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/snap-app/.idea/dataSources/4ece0b1d-00bf-460b-a95b-989918d0a190.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/snap-app/.idea/dataSources/4ece0b1d-00bf-460b-a95b-989918d0a190/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/snap-app/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/csc648-03-sp21-Team01.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csc648-03-sp21-Team01.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskProject/foodApp/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/foodApp/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskProject/foodApp/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/foodApp/templates/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="ac4c9332-d543-44ea-a52a-802f518bcc66" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,7 +69,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/flaskProject/templates" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
