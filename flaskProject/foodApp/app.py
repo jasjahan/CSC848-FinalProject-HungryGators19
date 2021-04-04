@@ -2,49 +2,60 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from urllib.parse import quote_plus
 from flask import request, render_template
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 import os
 from sqlalchemy import ForeignKey
-
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/images'
 app.jinja_env.filters['quote_plus'] = lambda u: quote_plus(u)
 
+# for sqlalchemy
+# DB_USER = 'team1'
+# DB_PASSWORD = '12345678'
+# DB_HOST = 'localhost'
+# DB_PORT = 3306
+# DB_NAME = 'restaurant_db'
 
 # for sqlalchemy
-DB_USER = 'team1'
-DB_PASSWORD = '12345678'
+DB_USER = 'root'
+DB_PASSWORD = 'sesame80'
 DB_HOST = 'localhost'
 DB_PORT = 3306
-DB_NAME = 'restaurant_db'
+DB_NAME = 'HungryGators-19'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://{}:{}@{}:{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
 
 db = SQLAlchemy(app)
 
+
 class Restaurant(db.Model):
     __tablename__ = 'restaurant'
+
     # We always need an id
     id = db.Column(db.Integer, primary_key=True)
 
-    # A restaurant has a name, address, phone, and zip:
+    # A restaurant has a name, address, phone, zip, image, and cuisine style:
     name = db.Column(db.String(45), nullable=False)
     address = db.Column(db.String(45), nullable=False)
     phone_number = db.Column(db.String(45), nullable=False)
     zip_code = db.Column(db.String(45), nullable=False)
     image = db.Column(db.String(100), nullable=False)
+    cuisine = db.Column(db.String(45), nullable=False)
 
-    def __init__(self, name, address, phone_number, zip_code, image):
+    # constructor for creating a restaurant
+    def __init__(self, name, address, phone_number, zip_code, image, cuisine):
         self.name = name
         self.address = address
         self.phone_number = phone_number
         self.zip_code = zip_code
         self.image = image
+        self.cuisine = cuisine
 
 
 class Menu(db.Model):
     __tablename__ = 'menu'
+
     # We always need an id
     id = db.Column(db.Integer, primary_key=True)
 
@@ -53,8 +64,8 @@ class Menu(db.Model):
     name = db.Column(db.String(45))
     price = db.Column(db.Float, nullable=False)
     quantity = db.Column(db.Integer)
-    # image = db.Column(db.Text, nullable=False)
 
+    # Constructor for creating a menu item (entry)
     def __init__(self, name, price, quantity, restaurant_id):
         self.name = name
         self.price = price
@@ -62,12 +73,13 @@ class Menu(db.Model):
         self.restaurant_id = restaurant_id
 
 
-def create_restaurant(new_name, new_address, new_phone, new_zip, new_image):
+# method for adding a restaurant
+def create_restaurant(new_name, new_address, new_phone, new_zip, new_image, cuisine):
     # Create a restaurant with the provided input.
     # At first, we will trust the user.
 
-    # This line maps to line 14 above (the Restaurant.__init__ method)
-    restaurant = Restaurant(new_name, new_address, new_phone, new_zip, new_image)
+    # This line maps to (the Restaurant.__init__ method)
+    restaurant = Restaurant(new_name, new_address, new_phone, new_zip, new_image, cuisine)
 
     # Actually add this restaurant to the database
     db.session.add(restaurant)
@@ -78,27 +90,12 @@ def create_restaurant(new_name, new_address, new_phone, new_zip, new_image):
     return restaurant
 
 
-def delete_restaurant(new_name, new_address, new_phone, new_zip):
-    # Delete a restaurant with the provided name.
-    # At first, we will trust the user.
-
-    # This line filters the query by restaurant name
-    restaurant = Restaurant(new_name, new_address, new_phone, new_zip).query.filter_by(name=new_name).first()
-
-    # Actually delete this restaurant from the database
-    db.session.delete(restaurant)
-
-    # Save all pending changes to the database
-    db.session.commit()
-
-    return restaurant
-
-
+# method for adding an entry
 def create_entry(new_name, new_price, new_quantity, restaurant_id):
     # Create an entry with the provided input.
     # At first, we will trust the user.
 
-    # This line maps to line 34 above (the Menu.__init__ method)
+    # This line maps to (the Menu.__init__ method)
     entry = Menu(new_name, new_price, new_quantity, restaurant_id)
 
     # Actually add this entry to the database
@@ -110,11 +107,12 @@ def create_entry(new_name, new_price, new_quantity, restaurant_id):
     return entry
 
 
+# method for deleting an entry
 def delete_entry(new_name, new_price, new_quantity):
     # Delete an entry with the provided input.
     # At first, we will trust the user.
 
-    # This line maps to line 34 above (the Menu.__init__ method)
+    # This line maps to (the Menu.__init__ method)
     entry = Menu(new_name, new_price, new_quantity)
 
     # Actually delete this entry from the database
@@ -125,7 +123,8 @@ def delete_entry(new_name, new_price, new_quantity):
 
     return entry
 
-# endpoint for searching the menu in the menu table in the database
+
+# endpoint for displaying the entries in a menu
 @app.route('/menu', methods=['GET', 'POST'])
 def search_menu():
     if request.method == "POST":
@@ -139,6 +138,7 @@ def search_menu():
             "quantity": row.quantity,
         } for row in result]
         return render_template('menu.html', name=restaurant_name, id=restaurant_id, menus=menus)
+
     elif request.method == "GET":
         restaurant_name, restaurant_id = request.args.get("name"), request.args.get("id", None)
         if restaurant_id is not None:
@@ -154,7 +154,7 @@ def search_menu():
             return render_template('menu.html', name=restaurant_name, id=restaurant_id, menus=[])
 
 
-# endpoint for deleting entries from the menu table in the database
+# endpoint for deleting an entry in a menu
 @app.route('/menu_delete', methods=['POST'])
 def menu_delete():
     restaurant_id = request.form['restaurant_id']
@@ -172,23 +172,31 @@ def menu_delete():
     return render_template('menu.html', name=restaurant_name, id=restaurant_id, menus=menus)
 
 
-# endpoint for searching restaurants in the restaurants table in the database
+# endpoint for searching a restaurant
 @app.route('/', methods=['GET', 'POST'])
 def search_restaurant():
     if request.method == "POST":
         query = request.form['restaurant']
-        query = '%{}%'.format(query)
-        result = db.session.query(Restaurant).filter(or_(
-            Restaurant.name.like(query),
-            or_(
-                Restaurant.address.like(query),
-                or_(
-                    Restaurant.phone_number.like(query),
-                    Restaurant.zip_code.like(query)
+        cuisine = request.form['cuisine']
+        if query:
+            query = '%{}%'.format(query)
+            result = db.session.query(Restaurant).filter(
+                and_(
+                    Restaurant.cuisine == cuisine,
+                    or_(
+                        Restaurant.name.like(query),
+                        or_(
+                            Restaurant.address.like(query),
+                            or_(
+                                Restaurant.phone_number.like(query),
+                                Restaurant.zip_code.like(query)
+                            )
+                        )
+                    )
                 )
             )
-        )
-        )
+        else:
+            result = db.session.query(Restaurant)
 
         restaurants = [{
             "id": row.id,
@@ -196,14 +204,15 @@ def search_restaurant():
             "address": row.address,
             "phone_number": row.phone_number,
             "zip_code": row.zip_code,
-            "image": row.image
+            "image": row.image,
+            "cuisine": row.cuisine
         } for row in result]
 
         return render_template('index.html', restaurants=restaurants)
     return render_template('index.html')
 
 
-# endpoint for adding restaurants to restaurant table in the database
+# endpoint for adding a restaurant
 @app.route('/add', methods=['GET', 'POST'])
 def add_restaurant():
     if request.method == 'GET':
@@ -215,26 +224,32 @@ def add_restaurant():
     # Get the incoming data from the request.form dictionary.
     # The values on the right, inside get(), correspond to the 'name'
     # values in the HTML form that was submitted.
+
+    # create a file path for an image
     file_path = ""
     file = request.files["image"]
     if file.filename != '':
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(file_path)
 
+    # retrieve post form data by each field
     restaurant_name = request.form.get('name_field')
     restaurant_address = request.form.get('address_field')
     restaurant_phone = request.form.get('phone_field')
     restaurant_zip = request.form.get('zip_field')
+    restaurant_cuisine = request.form.get('cuisine')
 
-    restaurant = create_restaurant(restaurant_name, restaurant_address, restaurant_phone, restaurant_zip, file_path)
+    # create a restaurant to be added
+    restaurant = create_restaurant(restaurant_name, restaurant_address, restaurant_phone,
+                                   restaurant_zip, file_path, restaurant_cuisine)
     return render_template('add_restaurant.html', restaurant=restaurant)
 
 
-# endpoint for deleting restaurants from the restaurant table in the database
+# endpoint for deleting a restaurant
 @app.route('/delete', methods=['GET', 'POST'])
 def remove_restaurant():
     if request.method == 'GET':
-        # Display the list of restaurants to delete from database upon rendering the page
+        # retrieve the list of restaurants to be deleted
         restaurants = Restaurant.query.all()
         return render_template('delete_restaurant.html', restaurants=restaurants)
 
@@ -246,15 +261,25 @@ def remove_restaurant():
     # values in the HTML form that was submitted.
 
     restaurant_name = request.form.get('name_field')
-    restaurant_address = request.form.get('address_field')
-    restaurant_phone = request.form.get('phone_field')
-    restaurant_zip = request.form.get('zip_field')
+    # Menu.query.filter_by(name=restaurant_name).delete()
+    # db.session.commit()
 
-    restaurant = delete_restaurant(restaurant_name, restaurant_address, restaurant_phone, restaurant_zip)
+    # retrieve a restaurant by restaurant name
+    restaurant = Restaurant.query.filter_by(name=restaurant_name).first()
+    db.session.delete(restaurant)
+    db.session.commit()
+
+    # delete the file path for an image
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], restaurant.image)
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
+    # retrieve the list of restaurants to be deleted
+    restaurant = Restaurant.query.all()
     return render_template('delete_restaurant.html', restaurant=restaurant)
 
 
-# endpoint for adding entries to the menu table in the database
+# endpoint for adding an entry to a menu
 @app.route('/add_entry', methods=['GET', 'POST'])
 def add_entry():
     if request.method == 'GET':
@@ -268,6 +293,7 @@ def add_entry():
     # The values on the right, inside get(), correspond to the 'name'
     # values in the HTML form that was submitted.
 
+    # retrieve post form data by each field
     entry_name = request.form.get('name_field')
     entry_price = request.form.get('price_field')
     entry_quantity = request.form.get('quantity_field')
@@ -281,4 +307,3 @@ def add_entry():
 if __name__ == '__main__':
     app.debug = True
     app.run()
-
