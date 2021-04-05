@@ -1,8 +1,8 @@
 <h3>Delete Restaurant (delete by entering the name and click on "delete")</h3>
 
-{% if restaurant %}
+{% if deleted %}
 
-<p><strong>{{restaurant.name}}</strong> successfully deleted! Delete another below.</p>
+<p><strong>{{deleted}}</strong> successfully deleted! Delete another below.</p>
 <p><a href="/">Back to Restaurant List</a></p>
 
 {% endif %}
@@ -11,11 +11,10 @@
 <!-- The form action and method correspond to a Flask route -->
 <form action="/delete" method="POST">
 
-<label for="name_id">Name</label>
-<input id="name_id" name="name_field" type="text"/></br>
-
-<!-- We need a submit button to submit a form! -->
-<input type="submit" value="Delete"/>
+    <label for="name_id">Name</label>
+    <input id="name_id" name="name_field" type="text"/></br>
+    <!-- We need a submit button to submit a form! -->
+    <input type="submit" value="Delete"/>
 
 </form>
 

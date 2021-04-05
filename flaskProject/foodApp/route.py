@@ -1,17 +1,14 @@
 from models import Restaurant, create_restaurant, delete_restaurant, Menu, create_entry
 from flask import Blueprint, request, render_template
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 from app_old import db
 import os
-
-
-
 
 
 route_app = Blueprint('route_app', __name__)
 
 
-# endpoint for searching the menu in the menu table in the database
+# endpoint for searching the menu
 @route_app.route('/menu', methods=['GET', 'POST'])
 def search_menu():
     if request.method == "POST":
@@ -40,7 +37,7 @@ def search_menu():
             return render_template('menu.html', name=restaurant_name, id=restaurant_id, menus=[])
 
 
-# endpoint for deleting entries from the menu table in the database
+# endpoint for deleting the entries
 @route_app.route('/menu_delete', methods=['POST'])
 def menu_delete():
     restaurant_id = request.form['restaurant_id']
@@ -58,23 +55,31 @@ def menu_delete():
     return render_template('menu.html', name=restaurant_name, id=restaurant_id, menus=menus)
 
 
-# endpoint for searching restaurants in the restaurants table in the database
+# endpoint for searching restaurants
 @route_app.route('/', methods=['GET', 'POST'])
 def search_restaurant():
     if request.method == "POST":
         query = request.form['restaurant']
-        query = '%{}%'.format(query)
-        result = db.session.query(Restaurant).filter(or_(
-            Restaurant.name.like(query),
-            or_(
-                Restaurant.address.like(query),
-                or_(
-                    Restaurant.phone_number.like(query),
-                    Restaurant.zip_code.like(query)
+        cuisine = request.form['cuisine']
+        if query:
+            query = '%{}%'.format(query)
+            result = db.session.query(Restaurant).filter(
+                and_(
+                    Restaurant.cuisine == cuisine,
+                    or_(
+                        Restaurant.name.like(query),
+                        or_(
+                            Restaurant.address.like(query),
+                            or_(
+                                Restaurant.phone_number.like(query),
+                                Restaurant.zip_code.like(query)
+                            )
+                        )
+                    )
                 )
             )
-        )
-        )
+        else:
+            result = db.session.query(Restaurant)
 
         restaurants = [{
             "id": row.id,
@@ -82,14 +87,15 @@ def search_restaurant():
             "address": row.address,
             "phone_number": row.phone_number,
             "zip_code": row.zip_code,
-            "image": row.image
+            "image": row.image,
+            "cuisine": row.cuisine
         } for row in result]
 
         return render_template('index.html', restaurants=restaurants)
     return render_template('index.html')
 
 
-# endpoint for adding restaurants to restaurant table in the database
+# endpoint for adding restaurants
 @route_app.route('/add', methods=['GET', 'POST'])
 def add_restaurant():
     if request.method == 'GET':
@@ -104,19 +110,21 @@ def add_restaurant():
     file_path = ""
     file = request.files["image"]
     if file.filename != '':
-        file_path = os.path.join(UPLOAD_FOLDER, file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(file_path)
 
     restaurant_name = request.form.get('name_field')
     restaurant_address = request.form.get('address_field')
     restaurant_phone = request.form.get('phone_field')
     restaurant_zip = request.form.get('zip_field')
+    restaurant_cuisine = request.form.get('cuisine')
 
-    restaurant = create_restaurant(restaurant_name, restaurant_address, restaurant_phone, restaurant_zip, file_path)
+    restaurant = create_restaurant(restaurant_name, restaurant_address, restaurant_phone,
+                                   restaurant_zip, file_path, restaurant_cuisine)
     return render_template('add_restaurant.html', restaurant=restaurant)
 
 
-# endpoint for deleting restaurants from the restaurant table in the database
+# endpoint for deleting restaurants
 @route_app.route('/delete', methods=['GET', 'POST'])
 def remove_restaurant():
     if request.method == 'GET':
@@ -132,15 +140,22 @@ def remove_restaurant():
     # values in the HTML form that was submitted.
 
     restaurant_name = request.form.get('name_field')
-    restaurant_address = request.form.get('address_field')
-    restaurant_phone = request.form.get('phone_field')
-    restaurant_zip = request.form.get('zip_field')
+    # Menu.query.filter_by(name=restaurant_name).delete()
+    # db.session.commit()
 
-    restaurant = delete_restaurant(restaurant_name, restaurant_address, restaurant_phone, restaurant_zip)
+    restaurant = Restaurant.query.filter_by(name=restaurant_name).first()
+    db.session.delete(restaurant)
+    db.session.commit()
+
+    file_path = os.path.join(route_app.config['UPLOAD_FOLDER'], restaurant.image)
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
+    restaurant = Restaurant.query.all()
     return render_template('delete_restaurant.html', restaurant=restaurant)
 
 
-# endpoint for adding entries to the menu table in the database
+# endpoint for adding entries
 @route_app.route('/add_entry', methods=['GET', 'POST'])
 def add_entry():
     if request.method == 'GET':
@@ -163,16 +178,3 @@ def add_entry():
     entry = create_entry(entry_name, entry_price, entry_quantity, restaurant_id)
     return render_template('add_entry.html', entry=entry, name=restaurant_name, id=restaurant_id)
 
-
-# # endpoint for uploading an image file
-# @route_app.route('/upload', methods=['GET', 'POST'])
-# def upload_file():
-#     if request.method == 'POST':
-#         pic = request.file['pic']
-#         filename = secure_filename(pic.filename)
-#         mimetype = pic.mimetype
-#         img = Img(img.pic.read(), mimetype=mimetype, name=)
-#         db.session.add(img)
-#         db.commit()
-#
-#     return

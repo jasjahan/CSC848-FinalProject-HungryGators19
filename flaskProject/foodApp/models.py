@@ -13,13 +13,15 @@ class Restaurant(db.Model):
     phone_number = db.Column(db.String(45), nullable=False)
     zip_code = db.Column(db.String(45), nullable=False)
     image = db.Column(db.String(100), nullable=False)
+    cuisine = db.Column(db.String(45), nullable=False)
 
-    def __init__(self, name, address, phone_number, zip_code, image):
+    def __init__(self, name, address, phone_number, zip_code, image, cuisine):
         self.name = name
         self.address = address
         self.phone_number = phone_number
         self.zip_code = zip_code
         self.image = image
+        self.cuisine = cuisine
 
 
 class Menu(db.Model):
@@ -32,7 +34,6 @@ class Menu(db.Model):
     name = db.Column(db.String(45))
     price = db.Column(db.Float, nullable=False)
     quantity = db.Column(db.Integer)
-    # image = db.Column(db.Text, nullable=False)
 
     def __init__(self, name, price, quantity, restaurant_id):
         self.name = name
@@ -41,12 +42,12 @@ class Menu(db.Model):
         self.restaurant_id = restaurant_id
 
 
-def create_restaurant(new_name, new_address, new_phone, new_zip, new_image):
+def create_restaurant(new_name, new_address, new_phone, new_zip, new_image, cuisine):
     # Create a restaurant with the provided input.
     # At first, we will trust the user.
 
-    # This line maps to line 14 above (the Restaurant.__init__ method)
-    restaurant = Restaurant(new_name, new_address, new_phone, new_zip, new_image)
+    # This line maps to line 18 above (the Restaurant.__init__ method)
+    restaurant = Restaurant(new_name, new_address, new_phone, new_zip, new_image, cuisine)
 
     # Actually add this restaurant to the database
     db.session.add(restaurant)
@@ -77,7 +78,7 @@ def create_entry(new_name, new_price, new_quantity, restaurant_id):
     # Create an entry with the provided input.
     # At first, we will trust the user.
 
-    # This line maps to line 34 above (the Menu.__init__ method)
+    # This line maps to line 18 above (the Menu.__init__ method)
     entry = Menu(new_name, new_price, new_quantity, restaurant_id)
 
     # Actually add this entry to the database
@@ -93,7 +94,7 @@ def delete_entry(new_name, new_price, new_quantity):
     # Delete an entry with the provided input.
     # At first, we will trust the user.
 
-    # This line maps to line 34 above (the Menu.__init__ method)
+    # This line maps to line 18 above (the Menu.__init__ method)
     entry = Menu(new_name, new_price, new_quantity)
 
     # Actually delete this entry from the database

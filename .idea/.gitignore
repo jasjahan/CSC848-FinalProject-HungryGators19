@@ -1,5 +1,10 @@
 # Default ignored files
 /shelf/
 /workspace.xml/
+<<<<<<< HEAD
 /.DS_store /
 /dbnavigator.xml/
+=======
+/.DS_store/
+.idea/dbnavigator.xml
+>>>>>>> release/1.0.2
