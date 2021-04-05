@@ -147,7 +147,7 @@ def remove_restaurant():
     db.session.delete(restaurant)
     db.session.commit()
 
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], restaurant.image)
+    file_path = os.path.join(route_app.config['UPLOAD_FOLDER'], restaurant.image)
     if os.path.exists(file_path):
         os.remove(file_path)
 
