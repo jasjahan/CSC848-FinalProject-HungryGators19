@@ -271,12 +271,12 @@ def remove_restaurant():
 
     # delete the file path for an image
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], restaurant.image)
-    if os.path.exists(file_path):
+    if os.path.isfile(file_path):
         os.remove(file_path)
 
     # retrieve the list of restaurants to be deleted
-    restaurant = Restaurant.query.all()
-    return render_template('delete_restaurant.html', restaurant=restaurant)
+    restaurants = Restaurant.query.all()
+    return render_template('delete_restaurant.html', restaurants=restaurants, deleted=restaurant_name)
 
 
 # endpoint for adding an entry to a menu
@@ -302,6 +302,12 @@ def add_entry():
 
     entry = create_entry(entry_name, entry_price, entry_quantity, restaurant_id)
     return render_template('add_entry.html', entry=entry, name=restaurant_name, id=restaurant_id)
+
+@app.route('/map', methods=['GET', 'POST'])
+def map_func():
+    if request.method == 'GET':
+        return render_template('map.html')
+
 
 @app.route('/map', methods=['GET', 'POST'])
 def map_func():

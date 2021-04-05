@@ -1,4 +1,4 @@
-SELECT * FROM `HungryGators-19`.restaurant;CREATE TABLE `restaurant` (
+CREATE TABLE `restaurant` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `address` varchar(45) DEFAULT NULL,
