@@ -308,13 +308,6 @@ def map_func():
     if request.method == 'GET':
         return render_template('map.html')
 
-
-@app.route('/map', methods=['GET', 'POST'])
-def map_func():
-    if request.method == 'GET':
-        return render_template('map.html')
-
-
 if __name__ == '__main__':
     app.debug = True
     app.run()
