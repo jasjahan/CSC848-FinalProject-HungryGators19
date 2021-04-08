@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-
+        scale=1">
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-
+        awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/static/index.css">
+    </head>
+    <header>
+        <a href="/add_entry?name={{ name }}&id={{ id }}">Add entry</a>
+        <a href="/">Main page</a>
+    </header>
+    <body>
+        <h1><center>Menu List for {{ name }}</center></h1>
+        <ul>
+            {% for menu in menus %}
+                <center>
+                    <p>
+                        Entry: {{ menu.name }},
+                        Price: ${{ menu.price }},
+                        Quantity: {{ menu.quantity }}
+                        <form method="POST" action="/menu_delete">
+{#                          <input type="number" name="quantity" min="0" max="{{ menu.quantity }}">#}
+                            <input type="hidden" name="restaurant_id" value="{{ id }}">
+                            <input type="hidden" name="restaurant_name" value="{{ name }}">
+                            <input type="hidden" name="menu_id" value="{{ menu.id }}">
+                            <button>X</button>
+                        </form>
+                    </p>
+                </center>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
+

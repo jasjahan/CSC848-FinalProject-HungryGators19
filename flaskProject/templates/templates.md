@@ -1,10 +1,10 @@
 # All of our website templates will go here (.html)
-- [ ] Homepage
+- [x] Homepage
 - [ ] About
 
 - [x] Rob (rob.html)
-- [X] Singh (Intro.html)
+- [x] Singh (Intro.html)
 
-- [ ] Jian
-- [ ] Brendan
-- [ ] Jasmine
+- [x] Jian
+- [x] Brendan
+- [x] Jasmine
