@@ -5,6 +5,8 @@ from flask import request, render_template, make_response
 from sqlalchemy import or_, and_
 import os
 from sqlalchemy import ForeignKey
+import pymysql
+pymysql.install_as_MySQLdb()
 
 
 app = Flask(__name__)
@@ -21,7 +23,7 @@ app.jinja_env.filters['quote_plus'] = lambda u: quote_plus(u)
 
 # for sqlalchemy
 DB_USER = 'root'
-DB_PASSWORD = '1992Pavel*'
+DB_PASSWORD = 'hOf788web'
 DB_HOST = 'localhost'
 DB_PORT = 3306
 DB_NAME = 'HungryGators-19'
