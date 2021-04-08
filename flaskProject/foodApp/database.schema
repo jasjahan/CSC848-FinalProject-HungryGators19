@@ -1,13 +1,14 @@
 CREATE TABLE `restaurant` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `address` varchar(45) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
   `phone_number` varchar(45) DEFAULT NULL,
   `zip_code` varchar(45) DEFAULT NULL,
   `image` varchar(100) NOT NULL,
   `cuisine` varchar(45) NOT NULL,
+  `description` varchar(300) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `menu` (

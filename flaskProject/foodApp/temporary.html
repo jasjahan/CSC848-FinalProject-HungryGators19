@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Map</title>
+    <style>
+      #map {
+        height: 400px;
+        width: 100%
+      }s
+    </style>
+    <script
+      src='https://maps.googleapis.com/maps/api/js?key=AIzaSyACO6dBtKF7trOPjjlHCp_L_dyY4jaZ61E&callback=initMap&libraries=&v=weekly' async
+    ></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var address = '1600 Amphitheatre Parkway, Mountain View, CA'
+      var api_key = 'AIzaSyACO6dBtKF7trOPjjlHCp_L_dyY4jaZ61E'
+
+			fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${api_key}`).then(response => {
+      	response.json().then(data => {
+          let place = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng}
+          let map = new google.maps.Map(document.getElementById('map'), { zoom: 4, center: place})
+          let marker = new google.maps.Marker({
+          	position: place,
+            map: map
+          })
+        })
+      })
+   </script>
+  </body>
+</html>

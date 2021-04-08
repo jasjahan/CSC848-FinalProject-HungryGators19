@@ -5,12 +5,19 @@ body {
 * {
   box-sizing: border-box;
 }
+#cuisine {
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 20%;
+  height: 44px;
+}
 form.example input[type=text] {
   padding: 10px;
   font-size: 17px;
   border: 1px solid grey;
   float: left;
-  width: 80%;
+  width: 60%;
   background: #f1f1f1;
 }
 form.example button {
@@ -32,3 +39,4 @@ form.example::after {
   clear: both;
   display: table;
 }
+

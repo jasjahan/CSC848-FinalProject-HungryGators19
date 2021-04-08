@@ -1,12 +1,14 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from urllib.parse import quote_plus
-from flask import request, render_template
+from flask import request, render_template, make_response
 from sqlalchemy import or_, and_
 import os
 from sqlalchemy import ForeignKey
 
+
 app = Flask(__name__)
+
 app.config['UPLOAD_FOLDER'] = 'static/images'
 app.jinja_env.filters['quote_plus'] = lambda u: quote_plus(u)
 
@@ -35,22 +37,24 @@ class Restaurant(db.Model):
     # We always need an id
     id = db.Column(db.Integer, primary_key=True)
 
-    # A restaurant has a name, address, phone, zip, image, and cuisine style:
+    # A restaurant has a name, address, phone, zip, image, cuisine style, and description:
     name = db.Column(db.String(45), nullable=False)
-    address = db.Column(db.String(45), nullable=False)
+    address = db.Column(db.String(100), nullable=False)
     phone_number = db.Column(db.String(45), nullable=False)
     zip_code = db.Column(db.String(45), nullable=False)
     image = db.Column(db.String(100), nullable=False)
     cuisine = db.Column(db.String(45), nullable=False)
+    description = db.Column(db.String(300), nullable=False)
 
     # constructor for creating a restaurant
-    def __init__(self, name, address, phone_number, zip_code, image, cuisine):
+    def __init__(self, name, address, phone_number, zip_code, image, cuisine, description):
         self.name = name
         self.address = address
         self.phone_number = phone_number
         self.zip_code = zip_code
         self.image = image
         self.cuisine = cuisine
+        self.description = description
 
 
 class Menu(db.Model):
@@ -74,12 +78,12 @@ class Menu(db.Model):
 
 
 # method for adding a restaurant
-def create_restaurant(new_name, new_address, new_phone, new_zip, new_image, cuisine):
+def create_restaurant(new_name, new_address, new_phone, new_zip, new_image, cuisine, description):
     # Create a restaurant with the provided input.
     # At first, we will trust the user.
 
     # This line maps to (the Restaurant.__init__ method)
-    restaurant = Restaurant(new_name, new_address, new_phone, new_zip, new_image, cuisine)
+    restaurant = Restaurant(new_name, new_address, new_phone, new_zip, new_image, cuisine, description)
 
     # Actually add this restaurant to the database
     db.session.add(restaurant)
@@ -182,21 +186,29 @@ def search_restaurant():
             query = '%{}%'.format(query)
             result = db.session.query(Restaurant).filter(
                 and_(
-                    Restaurant.cuisine == cuisine,
+                    Restaurant.cuisine == cuisine if cuisine != 'all cuisines' else True,
                     or_(
                         Restaurant.name.like(query),
                         or_(
                             Restaurant.address.like(query),
                             or_(
                                 Restaurant.phone_number.like(query),
-                                Restaurant.zip_code.like(query)
+                                Restaurant.zip_code.like(query),
+                                or_(
+                                    Restaurant.description.like(query)
+                                )
                             )
                         )
                     )
                 )
             )
         else:
-            result = db.session.query(Restaurant)
+            result = db.session.query(Restaurant).filter(
+                and_(
+                    Restaurant.cuisine == cuisine if cuisine != 'all cuisines' else True,
+                    True
+                )
+            )
 
         restaurants = [{
             "id": row.id,
@@ -205,11 +217,23 @@ def search_restaurant():
             "phone_number": row.phone_number,
             "zip_code": row.zip_code,
             "image": row.image,
-            "cuisine": row.cuisine
+            "cuisine": row.cuisine,
+            "description": row.description
         } for row in result]
 
-        return render_template('index.html', restaurants=restaurants)
-    return render_template('index.html')
+        # disabling cache
+        r = make_response(render_template('index.html', restaurants=restaurants))
+        r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        r.headers["Pragma"] = "no-cache"
+        r.headers["Expires"] = "0"
+        r.headers['Cache-Control'] = 'public, max-age=0'
+        return r
+    r = make_response(render_template('index.html'))
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
 
 
 # endpoint for adding a restaurant
@@ -238,10 +262,11 @@ def add_restaurant():
     restaurant_phone = request.form.get('phone_field')
     restaurant_zip = request.form.get('zip_field')
     restaurant_cuisine = request.form.get('cuisine')
+    restaurant_description = request.form.get('description')
 
     # create a restaurant to be added
     restaurant = create_restaurant(restaurant_name, restaurant_address, restaurant_phone,
-                                   restaurant_zip, file_path, restaurant_cuisine)
+                                   restaurant_zip, file_path, restaurant_cuisine, restaurant_description)
     return render_template('add_restaurant.html', restaurant=restaurant)
 
 
@@ -302,12 +327,6 @@ def add_entry():
 
     entry = create_entry(entry_name, entry_price, entry_quantity, restaurant_id)
     return render_template('add_entry.html', entry=entry, name=restaurant_name, id=restaurant_id)
-
-
-@app.route('/map', methods=['GET', 'POST'])
-def map_func():
-    if request.method == 'GET':
-        return render_template('map.html')
 
 
 if __name__ == '__main__':
