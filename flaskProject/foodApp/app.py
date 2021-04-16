@@ -23,10 +23,10 @@ app.jinja_env.filters['quote_plus'] = lambda u: quote_plus(u)
 
 # for sqlalchemy
 DB_USER = 'root'
-DB_PASSWORD = ''
+DB_PASSWORD = 'blackmamba24'
 DB_HOST = 'localhost'
 DB_PORT = 3306
-DB_NAME = 'HungryGators-19'
+DB_NAME = 'Database_DB'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://{}:{}@{}:{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
 
