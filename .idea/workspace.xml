@@ -290,6 +290,7 @@
       <workItem from="1617598204247" duration="1256000" />
       <workItem from="1618430794149" duration="1350000" />
       <workItem from="1618608937218" duration="607000" />
+      <workItem from="1618961757148" duration="147000" />
     </task>
     <servers />
   </component>
@@ -309,7 +310,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/csc648_03_sp21_Team01$app.coverage" NAME="app Coverage Results" MODIFIED="1617915643447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flaskProject" />
+    <SUITE FILE_PATH="coverage/csc648_03_sp21_Team01$app.coverage" NAME="app Coverage Results" MODIFIED="1618962150119" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flaskProject/foodApp" />
     <SUITE FILE_PATH="coverage/csc648_03_sp21_Team01$app_1_.coverage" NAME="app(1) Coverage Results" MODIFIED="1617914882787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flaskProject" />
     <SUITE FILE_PATH="coverage/csc648_03_sp21_Team01$app__1_.coverage" NAME="app (1) Coverage Results" MODIFIED="1617915604876" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flaskProject/foodApp" />
   </component>
