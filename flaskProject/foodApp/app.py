@@ -14,6 +14,8 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/images'
 app.jinja_env.filters['quote_plus'] = lambda u: quote_plus(u)
 
+#BRANDENTESTPUSH
+
 # for sqlalchemy
 # DB_USER = 'team1'
 # DB_PASSWORD = '12345678'
@@ -26,7 +28,7 @@ DB_USER = 'root'
 DB_PASSWORD = 'blackmamba24'
 DB_HOST = 'localhost'
 DB_PORT = 3306
-DB_NAME = 'Database_DB'
+DB_NAME = 'DatabaseDB'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://{}:{}@{}:{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
 
