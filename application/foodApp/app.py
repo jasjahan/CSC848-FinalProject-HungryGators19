@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/images'
 app.jinja_env.filters['quote_plus'] = lambda u: quote_plus(u)
 
-#BRANDENTESTPUSH
+#BRANDENTESTPUSHFINAL
 
 # for sqlalchemy
 # DB_USER = 'team1'
