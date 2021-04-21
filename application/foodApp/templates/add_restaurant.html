@@ -1,0 +1,47 @@
+<h3>Add Restaurant</h3>
+
+{% if restaurant %}
+
+<p><strong>{{restaurant.name}}</strong> successfully created! Add another below.</p>
+<p><a href="/">Back to Restaurant List</a></p>
+
+{% endif %}
+
+
+<form action="/add" method="POST" enctype="multipart/form-data">
+
+	<label for="name_id">Name</label>
+	<input id="name_id" name="name_field" type="text"/></br>
+
+	<label for="address_id">Address</label>
+	<input id="address_id" name="address_field" type="text"/></br>
+
+	<label for="phone_id">Phone number</label>
+	<input id="phone_id" name="phone_field" type="text"/></br>
+
+	<label for="zip_id">Zip code</label>
+    <input id="zip_id" name="zip_field" type="text"/></br>
+
+    <label for="description_id">Description</label>
+    <input id="description_id" name="description" type="text"/></br>
+
+    <label for="cuisine_id">Select a cuisine:</label>
+    <input type="radio" id="american" name="cuisine" value="american"
+         checked>
+    <label for="american">American</label>
+
+    <input type="radio" id="asian" name="cuisine" value="asian">
+    <label for="asian">Asian</label>
+
+    <input type="radio" id="european" name="cuisine" value="european">
+    <label for="european">European</label>
+
+    <input type="radio" id="african" name="cuisine" value="african">
+    <label for="african">African</label></br>
+
+	<label for="image">Upload an image:</label>
+	<input type="file" name="image" id="image"></br>
+
+	<input type="submit" value="Add"/>
+
+</form>
