@@ -5,16 +5,16 @@ from flask import request, render_template, make_response
 from sqlalchemy import or_, and_
 import os
 from sqlalchemy import ForeignKey
+
 import pymysql
 pymysql.install_as_MySQLdb()
+
 
 
 app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = 'static/images'
 app.jinja_env.filters['quote_plus'] = lambda u: quote_plus(u)
-
-#BRANDENTESTPUSHFINAL
 
 # for sqlalchemy
 # DB_USER = 'team1'
@@ -25,7 +25,7 @@ app.jinja_env.filters['quote_plus'] = lambda u: quote_plus(u)
 
 # for sqlalchemy
 DB_USER = 'root'
-DB_PASSWORD = ''
+DB_PASSWORD = 'hOf788web'
 DB_HOST = 'localhost'
 DB_PORT = 3306
 DB_NAME = 'DatabaseDB'
@@ -332,10 +332,6 @@ def add_entry():
     entry = create_entry(entry_name, entry_price, entry_quantity, restaurant_id)
     return render_template('add_entry.html', entry=entry, name=restaurant_name, id=restaurant_id)
 
-@app.route('/map', methods=['GET', 'POST'])
-def map_func():
-    if request.method == 'GET':
-        return render_template('map.html')
 
 if __name__ == '__main__':
     app.debug = True
