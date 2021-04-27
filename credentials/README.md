@@ -9,7 +9,7 @@
 
 1. Server URL or IP: 
    Server IPv4 DNS for login: ec2-18-223-160-96.us-east-2.compute.amazonaws.com
-   Server IP to get to website: http://18.223.160.96:5000/ (HTTPS not enabled in NGINX)
+   Server IP to get to website: http://18.223.160.96:5002/ (HTTPS not enabled in NGINX)
 2. SSH username: ubuntu
 3. SSH password or key.(Key inside credentials folder)
     <br> If a ssh key is used please upload the key to the credentials folder.
@@ -24,7 +24,7 @@ Command to make pem key accessible: sudo chmod 400 ./team2.pem
 
 Command to start server: ssh -i "team2.pem" ubuntu@ec2-18-223-160-96.us-east-2.compute.amazonaws.com
 
-URL: http://18.223.160.96:5000/ (No https!)
+URL: http://18.223.160.96:5002/ (No https!)
 
 To access mysql: mysql -u team1 -p
 
