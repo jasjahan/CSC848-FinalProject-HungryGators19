@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>HungryGators-19</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+     html{
+      height: 97vh;
+  }
+
+  header{
+    text-align: center;
+  }
+
+  body{
+    width: 100%;
+    height: 97vh;
+    background-color: floralwhite;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+  }
+
+  .navbar {
+      background-color: black;
+      margin-bottom: 0;
+      border-radius: 0;
+  }
+
+  .carousel .item {
+  height: 300px;
+   }
+
+  .item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 300px;
+   }
+
+  .footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: beige;
+   color: black;
+   text-align: center;
+   }
+
+  .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      margin: auto;
+      min-height:200px;
+  }
+
+
+  /* Hide the carousel text when the screen is less than 600 pixels wide */
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none;
+    }
+  }
+  </style>
+</head>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="static/logo.png">Logo</a>
+      <a class="navbar-brand" href="home.html">HungryGators-19</a>
+
+    </div>
+
+    <ul class="nav navbar-nav">
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> All Cuisine <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+         <li><a href="menu.html">American</a></li>
+          <li><a href="menu.html">Mexican</a></li>
+          <li><a href="menu.html">Italian</a></li>
+        </ul>
+      </li>
+
+        <form class="navbar-form navbar-left" action="/action_page.php" >
+           <div class="form-group">
+                <input type="text" class="form-control" style="width: 300px; height: 34px" placeholder="Search by Restaurants">
+           </div>
+                <button type="submit" class="btn btn-default">Search</button>
+        </form>
+    </ul>
+
+
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="aboutus.html"><span class=""></span> About </a></li>
+          <li><a href="logowner.html"><span class=""></span> Restaurant Owner</a></li>
+          <li><a href="logdriver.html"><span class=""></span> Delivery Driver</a></li>
+          <li><a href="regsf.html"><span class="glyphicon glyphicon-user"></span>Register</a></li>
+          <li><a href="logsf.html"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+      </ul>
+
+  </div>
+</nav>
+
+<!-- Body of the specific page goes here, is extended here -->
+{% block content %}
+
+{% endblock %}
+
+<!-- Footer has been removed, is shown below and will extend page at the bottom
+</div><br>
+
+<h5>  </h5>
+        <div class="footer">
+              <p>@Copyright</p>
+        </div>
+</div>
+
+-->
+
+
+</html>

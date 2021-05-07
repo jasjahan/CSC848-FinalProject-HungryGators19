@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Restaurant Owner Registration</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+  <style>
+    html{
+      height: 97vh;
+  }
+  header{
+    text-align: center;
+  }
+  body{
+    width: 100%;
+    height: 97vh;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+  }
+    .navbar {
+      background-color: black;
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+   body {
+        background-image: url('/static/reg.png');
+        background-size: 1440px 900px;
+        background-color: floralwhite;
+        font-family: 'Ubuntu', sans-serif;
+    }
+
+    .main {
+        background-color: beige;
+        width: 400px;
+        height: 600px;
+        margin: 7em auto;
+        border-radius: 1.5em;
+        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+    }
+
+    .sign {
+        padding-top: 40px;
+        color: black;
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: bold;
+        font-size: 23px;
+    }
+
+    .un {
+    width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+    }
+
+    form.form1 {
+        padding-top: 40px;
+    }
+
+    .pass {
+            width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+    }
+
+
+    .un:focus, .pass:focus {
+        border: 2px solid rgba(0, 0, 0, 0.18) !important;
+
+    }
+
+    .submit {
+      cursor: pointer;
+        border-radius: 5em;
+        color: black;
+        background: linear-gradient(to right, gray, lightgray);
+        border: 0;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        font-family: 'Ubuntu', sans-serif;
+        margin-left: 35%;
+        font-size: 13px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    }
+
+
+
+    a {
+        text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+        color: slategray;
+        text-decoration: none
+    }
+
+    @media (max-width: 600px) {
+        .main {
+            border-radius: 0px;
+        }
+
+    }
+
+  </style>
+</head>
+
+<header>
+    <div class="header">
+              <p> CSC 648/848,Spring 2021,Team 01</p>
+    </div>
+</header>
+
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="static/logo.png">Logo</a>
+      <a class="navbar-brand" href="home.html">HungryGators-19</a>
+
+    </div>
+
+    <ul class="nav navbar-nav">
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> All Cuisine <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="menu.html">American</a></li>
+          <li><a href="menu.html">Mexican</a></li>
+          <li><a href="menu.html">Italian</a></li>
+        </ul>
+      </li>
+
+        <form class="navbar-form navbar-left" action="/action_page.php" >
+           <div class="form-group">
+                <input type="text" class="form-control" style="width: 300px; height: 34px" placeholder="Search by Restaurants">
+           </div>
+                <button type="submit" class="btn btn-default">Search</button>
+        </form>
+    </ul>
+
+
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="home.html"><span class=""></span> About </a></li>
+          <li><a href="logowner.html"><span class=""></span> Restaurant Owner</a></li>
+          <li><a href="logdriver.html"><span class=""></span> Delivery Driver</a></li>
+          <li><a href="regsf.html"><span class="glyphicon glyphicon-user"></span>Register</a></li>
+          <li><a href="loginsf.html"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+      </ul>
+  </div>
+</nav>
+
+
+
+
+<body>
+  <div class="main">
+    <p class="sign" align="center">Register</p>
+    <p class="sign" align="center">Restaurant Owner</p>
+
+    <form class="form3">
+      <input class="un " type="text" align="center" placeholder="Full name">
+      <input class="pass" type="text" align="center" placeholder=" SFSU Email(Username)">
+      <input class="pass" type="password" align="center" placeholder="Create a Password">
+      <input class="pass" type="password" align="center" placeholder="Confirm Password">
+
+      <center><input class="term" type="checkbox" id="term">
+      <label for="term"> I accept the Terms and Conditions.</label><br></center>
+      <h3>   </h3>
+      <a class="submit" align="center"> Register Now </a>
+
+      <h3>   </h3>
+
+      <p class="member" align="center"><a href="#">Already a member? Log in! </a></p>
+
+
+    </form>
+  </div>
+</body>
+
+
+
+</body>
+</html>
