@@ -336,21 +336,29 @@ def add_entry():
 def home():
     return render_template("home.html", content="Testing")
 
-@app.route("/display.html")
-def display():
-    return render_template("display.html", content="Testing")
-
 @app.route("/aboutus.html")
 def about():
     return render_template("aboutus.html", content="Testing")
 
+@app.route("/jas.html")
+def jas():
+    return render_template("jas.html", content="Testing")
+
 @app.route("/regowner.html")
-def regowner():
+def owner():
     return render_template("regowner.html", content="Testing")
 
+@app.route("/loginowner.html")
+def logowner():
+    return render_template("loginowner.html", content="Testing")
+
 @app.route("/regdriver.html")
-def regdriver():
+def driver():
     return render_template("regdriver.html", content="Testing")
+
+@app.route("/logindriver.html")
+def logdriver():
+    return render_template("logindriver.html", content="Testing")
 
 @app.route("/regsf.html")
 def regsf():
@@ -360,13 +368,11 @@ def regsf():
 def logsf():
     return render_template("loginsf.html", content="Testing")
 
-@app.route("/jas.html")
-def jas():
-    return render_template("jas.html", content="Testing")
 
-@app.route("/nav-test")
-def nav():
-    return render_template("nav.html", content="Testing")
+
+
+
+
 
 if __name__ == '__main__':
     app.debug = True
