@@ -25,10 +25,10 @@ app.jinja_env.filters['quote_plus'] = lambda u: quote_plus(u)
 
 # for sqlalchemy
 DB_USER = 'root'
-DB_PASSWORD = 'hOf788web'
+DB_PASSWORD = '1992Pavel*'
 DB_HOST = 'localhost'
 DB_PORT = 3306
-DB_NAME = 'DatabaseDB'
+DB_NAME = 'HungryGators-19'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://{}:{}@{}:{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
 
@@ -335,6 +335,10 @@ def add_entry():
 @app.route("/home.html")
 def home():
     return render_template("home.html", content="Testing")
+
+@app.route("/display.html")
+def display():
+    return render_template("display.html", content="Testing")
 
 @app.route("/aboutus.html")
 def about():
