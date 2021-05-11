@@ -344,21 +344,42 @@ def about():
 def jas():
     return render_template("jas.html", content="Testing")
 
+@app.route("/bran.html")
+def bran():
+    return render_template("bran.html", content="Testing")
+
+@app.route("/rob.html")
+def rob():
+    return render_template("rob.html", content="Testing")
+
+@app.route("/gurjot.html")
+def gur():
+    return render_template("gurjot.html", content="Testing")
+
+@app.route("/tin.html")
+def tin():
+    return render_template("tin.html", content="Testing")
+
+@app.route("/pan.html")
+def pan():
+    return render_template("pan.html", content="Testing")
+
 @app.route("/regowner.html")
-def owner():
+def regowner():
     return render_template("regowner.html", content="Testing")
 
-@app.route("/loginowner.html")
-def logowner():
-    return render_template("loginowner.html", content="Testing")
-
 @app.route("/regdriver.html")
-def driver():
+def regdriver():
     return render_template("regdriver.html", content="Testing")
 
 @app.route("/logindriver.html")
-def logdriver():
+def logindriver():
     return render_template("logindriver.html", content="Testing")
+
+@app.route("/loginowner.html")
+def loginowner():
+    return render_template("loginowner.html", content="Testing")
+
 
 @app.route("/regsf.html")
 def regsf():

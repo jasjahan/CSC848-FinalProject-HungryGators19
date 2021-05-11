@@ -1,3 +1,5 @@
+{% extends 'nav.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -140,54 +142,13 @@
 
 
 <body>
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="static/logo.png">Logo</a>
-      <a class="navbar-brand" href="home.html">HungryGators-19</a>
-
-    </div>
-
-    <ul class="nav navbar-nav">
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> All Cuisine <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="menu.html">American</a></li>
-          <li><a href="menu.html">Mexican</a></li>
-          <li><a href="menu.html">Italian</a></li>
-        </ul>
-      </li>
-
-        <form class="navbar-form navbar-left" action="/action_page.php" >
-           <div class="form-group">
-                <input type="text" class="form-control" style="width: 300px; height: 34px" placeholder="Search by Restaurants">
-           </div>
-                <button type="submit" class="btn btn-default">Search</button>
-        </form>
-    </ul>
-
-
-      <ul class="nav navbar-nav navbar-right">
-          <li><a href="home.html"><span class=""></span> About </a></li>
-          <li><a href="regowner.html"><span class=""></span> Restaurant Owner</a></li>
-          <li><a href="regdriver.html"><span class=""></span> Delivery Driver</a></li>
-          <li><a href="regsf.html"><span class="glyphicon glyphicon-user"></span>Register</a></li>
-          <li><a href="loginsf.html"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-      </ul>
-  </div>
-</nav>
-
-
-
-
-<body>
   <div class="main">
     <p class="sign" align="center">Register</p>
     <p class="sign" align="center">Delivery Driver</p>
 
     <form class="form3">
       <input class="un " type="text" align="center" placeholder="Full name">
-      <input class="pass" type="text" align="center" placeholder=" SFSU Email(Username)">
+      <input class="un" type="text" align="center" placeholder=" SFSU Email(Username)">
       <input class="pass" type="password" align="center" placeholder="Create a Password">
       <input class="pass" type="password" align="center" placeholder="Confirm Password">
 
@@ -205,7 +166,6 @@
   </div>
 </body>
 
-
-
-</body>
 </html>
+
+{% endblock %}
