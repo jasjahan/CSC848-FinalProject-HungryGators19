@@ -25,7 +25,7 @@ app.jinja_env.filters['quote_plus'] = lambda u: quote_plus(u)
 
 # for sqlalchemy
 DB_USER = 'root'
-DB_PASSWORD = '1992Pavel*'
+DB_PASSWORD = 'Gurjot-98554'
 DB_HOST = 'localhost'
 DB_PORT = 3306
 DB_NAME = 'HungryGators-19'
