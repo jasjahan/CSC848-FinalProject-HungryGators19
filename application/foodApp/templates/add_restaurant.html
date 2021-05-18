@@ -1,14 +1,18 @@
 <h3>Add Restaurant</h3>
+<p><a href="/show_restaurants?owner_id={{ owner_id }}&owner_name={{ owner_name }}">Show all restaurants</a></p>
 
 {% if restaurant %}
 
 <p><strong>{{restaurant.name}}</strong> successfully created! Add another below.</p>
-<p><a href="/">Back to Restaurant List</a></p>
+<p><a href="/add_entry">Add menu to the newly added restaurant</a></p>
 
 {% endif %}
 
 
 <form action="/add" method="POST" enctype="multipart/form-data">
+
+    <input name="owner_id" type="hidden" value="{{ owner_id }}"/>
+    <input name="owner_name" type="hidden" value="{{ owner_name }}"/>
 
 	<label for="name_id">Name</label>
 	<input id="name_id" name="name_field" type="text"/></br>

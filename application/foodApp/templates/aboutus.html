@@ -1,4 +1,70 @@
-{% extends "nav.html" %}
+{% extends 'nav.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <title>Meet the Team</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+
+  <style>
+    .navbar {
+      background-color: black;
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+  body {
+        background-color: beige;
+        background-size: 1440px 800px;
+        font-family: 'Ubuntu', sans-serif;
+  }
+
+  a {
+  color: #2196F3;
+  }
+
+  hr {
+  border: 1px solid lightgrey;
+  }
+
+   .container {
+    padding: 20px 80px;
+  }
+   img {
+  border-radius: 50%;
+       border: 1px solid #555
+}
+
+   .column {
+  float: left;
+  width: 20%;
+  padding: 5px;
+}
+
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+  </style>
+
+</head>
+
+
+
+
 <body>
 
 <div class="container text-center">
@@ -11,7 +77,8 @@
       <div class="col-sm-4">
       <img src="/static/prof.png" alt="Image" class="center"width="200" height="200">
         <p> </p><br>
-        <p>Dragutin Petkovic(CEO)</p><br>
+        <p>Prof. Dragutin Petkovic</p>
+          <p>CS Department, SFSU Class teacher, also simulating the role of CEO and customer council;</p><br>
       </div>
 
       <div class="col-sm-4">
@@ -65,5 +132,7 @@
   </div>
 </div>
 </body>
+</html>
 
+{% endblock %}
 

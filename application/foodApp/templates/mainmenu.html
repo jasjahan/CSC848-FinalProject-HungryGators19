@@ -1,0 +1,80 @@
+{% extends 'nav.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <title>Restaurant Menu</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  <style>
+    .navbar {
+      background-color: black;
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    body {
+
+        background-size: 1440px 800px;
+        background-color: floralwhite;
+        font-family: 'Ubuntu', sans-serif;
+   }
+
+   </style>
+
+</head>
+
+
+
+<body>
+
+
+  <div class="container">
+  <center><h2>Cafe Shop Menu</h2></center>
+
+  <div class="card">
+
+  <table class="table table-bordered">
+     <h2>   </h2>
+
+    <tbody>
+      <tr>
+        <td><h4 class="card-title">Mango Chicken Salad $10</h4>
+        <p class="card-text">Simple, fresh ingredients come together for this easy-to-make and easier-to-devour Mango with roasted chickpeas.</p></td>
+        <td><a href="#" class="btn btn-primary">Add to Cart</a></td>
+      </tr>
+
+      <tr>
+       <td><h4 class="card-title">Orange Chicken $15</h4>
+       <p class="card-text">Deep Fried Pieces of Chicken Breast Covered in a Sweet and Spicy Orange Sauce. Served with White Rice and Vegetables.</p></td>
+       <td><a href="#" class="btn btn-primary">Add to Cart</a></td>
+      </tr>
+
+      <tr>
+        <td><h4 class="card-title">Rib Eye Steak $45</h4>
+        <p class="card-text">This steak is rich, juicy and full-flavored with generous marbling throughout. Sold bone-in.</p></td>
+        <td><a href="#" class="btn btn-primary">Add to Cart</a></td>
+      </tr>
+
+      <tr>
+        <td><h4 class="card-title">Spicy Chicken $35</h4>
+        <p class="card-text">Our buffalo chicken dip recipe delivers bold, three-cheese flavors and a kick of spice from the hot sauce.</p></td>
+        <td><a href="#" class="btn btn-primary">Add to Cart</a></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  </div>
+</div>
+
+</body>
+</html>
+{% endblock %}

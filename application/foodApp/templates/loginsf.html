@@ -145,12 +145,6 @@
   </style>
 </head>
 
-<header>
-    <div class="header">
-              <p> CSC 648/848,Spring 2021,Team 01</p>
-    </div>
-</header>
-
 <body>
 
 
@@ -158,7 +152,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="static/logo.png">Logo</a>
-      <a class="navbar-brand" href="home.html">HungryGators-19</a>
+      <a class="navbar-brand" href="/">HungryGators-19</a>
 
     </div>
 
@@ -182,10 +176,10 @@
 
       <ul class="nav navbar-nav navbar-right">
           <li><a href="home.html"><span class=""></span> About </a></li>
-          <li><a href="logowner.html"><span class=""></span> Restaurant Owner</a></li>
-          <li><a href="logdriver.html"><span class=""></span> Delivery Driver</a></li>
+          <li><a href="regowner.html"><span class=""></span> Restaurant Owner</a></li>
+          <li><a href="regdriver.html"><span class=""></span> Delivery Driver</a></li>
           <li><a href="regsf.html"><span class="glyphicon glyphicon-user"></span>Register</a></li>
-          <li><a href="loginsf.html"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+          <li><a href="/login_sfsu"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
       </ul>
 
   </div>
@@ -198,10 +192,13 @@
     <p class="sign" align="center">Log In</p>
     <p class="sign" align="center">SFSU Student|Faculty|Staff</p>
 
-    <form class="form3">
-      <input class="un " type="text" align="center" placeholder="SFSU Email">
-      <input class="pass" type="password" align="center" placeholder="Password">
-      <a class="submit" align="center"> Login </a>
+    <form class="form3" method="post" action="/login_sfsu">
+      <input class="un " type="text" align="center" placeholder="SFSU Email" name="email">
+      <input class="pass" type="password" align="center" placeholder="Password" name="password">
+      <input type="submit" class="submit" align="center"></input>
+        {%  if failure %}
+            <p style="text-align: center; font-size: 10px; color: red">{{ failure }}</p>
+        {% endif %}
       <p class="forgot" align="center"><a href="#">Forgot Password? </a></p>
     </form>
   </div>

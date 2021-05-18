@@ -138,19 +138,13 @@
   </style>
 </head>
 
-<header>
-    <div class="header">
-              <p> CSC 648/848,Spring 2021,Team 01</p>
-    </div>
-</header>
-
 <body>
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="static/logo.png">Logo</a>
-      <a class="navbar-brand" href="home.html">HungryGators-19</a>
+      <a class="navbar-brand" href="/">HungryGators-19</a>
 
     </div>
 
@@ -174,10 +168,10 @@
 
       <ul class="nav navbar-nav navbar-right">
           <li><a href="home.html"><span class=""></span> About </a></li>
-          <li><a href="logowner.html"><span class=""></span> Restaurant Owner</a></li>
-          <li><a href="logdriver.html"><span class=""></span> Delivery Driver</a></li>
+          <li><a href="loginowner.html"><span class=""></span> Restaurant Owner</a></li>
+          <li><a href="logindriver.html"><span class=""></span> Delivery Driver</a></li>
           <li><a href="regsf.html"><span class="glyphicon glyphicon-user"></span>Register</a></li>
-          <li><a href="loginsf.html"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+          <li><a href="/login_sfsu"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
       </ul>
   </div>
 </nav>
@@ -190,20 +184,24 @@
     <p class="sign" align="center">Register</p>
     <p class="sign" align="center">Restaurant Owner</p>
 
-    <form class="form3">
-      <input class="un " type="text" align="center" placeholder="Full name">
-      <input class="pass" type="text" align="center" placeholder=" SFSU Email(Username)">
-      <input class="pass" type="password" align="center" placeholder="Create a Password">
-      <input class="pass" type="password" align="center" placeholder="Confirm Password">
+    <form class="form3" method="post" action="/register_restaurant_owner">
+      <input class="un " type="text" align="center" placeholder="Full name" name="full_name">
+      <input class="pass" type="text" align="center" placeholder=" SFSU Email(Username)" name="email">
+      <input class="pass" type="password" align="center" placeholder="Create a Password" name="password">
+      <input class="pass" type="password" align="center" placeholder="Confirm Password" name="password_repeat">
 
       <center><input class="term" type="checkbox" id="term">
       <label for="term"> I accept the Terms and Conditions.</label><br></center>
-      <h3>   </h3>
-      <a class="submit" align="center"> Register Now </a>
+      <input type="submit" class="submit" align="center"></input>
 
-      <h3>   </h3>
+        {%  if success %}
+            <p style="text-align: center; font-size: 10px; color: green">{{ success }}</p>
+        {%  elif failure %}
+            <p style="text-align: center; font-size: 10px; color: red">{{ failure }}</p>
+        {% endif %}
 
-      <p class="member" align="center"><a href="#">Already a member? Log in! </a></p>
+
+      <p class="member" align="center"><a href="loginowner.html">Already a member? Log in! </a></p>
 
 
     </form>

@@ -5,6 +5,8 @@ from flask import request, render_template, make_response
 from sqlalchemy import or_, and_
 import os
 from sqlalchemy import ForeignKey
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 import pymysql
 pymysql.install_as_MySQLdb()
@@ -25,14 +27,32 @@ app.jinja_env.filters['quote_plus'] = lambda u: quote_plus(u)
 
 # for sqlalchemy
 DB_USER = 'root'
-DB_PASSWORD = 'hOf788web'
+DB_PASSWORD = 'sesame80'
 DB_HOST = 'localhost'
 DB_PORT = 3306
-DB_NAME = 'DatabaseDB'
+DB_NAME = 'HungryGators-19'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://{}:{}@{}:{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
 
 db = SQLAlchemy(app)
+
+
+class User(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(45))
+    email = db.Column(db.String(100), nullable=False, unique=True)
+    password = db.Column(db.String(100), nullable=False)
+    user_type = db.Column(db.Integer(), nullable=False)
+
+    def __init__(self, name, email, password, user_type):
+        self.name = name
+        self.email = email
+        self.password = password
+        self.user_type = user_type
+
+    def __repr__(self):
+        return "<{}:{}>".format(self.name, self.email)
 
 
 class Restaurant(db.Model):
@@ -42,6 +62,7 @@ class Restaurant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     # A restaurant has a name, address, phone, zip, image, cuisine style, and description:
+    owner_id = db.Column(db.Integer, nullable=False)
     name = db.Column(db.String(45), nullable=False)
     address = db.Column(db.String(100), nullable=False)
     phone_number = db.Column(db.String(45), nullable=False)
@@ -50,8 +71,10 @@ class Restaurant(db.Model):
     cuisine = db.Column(db.String(45), nullable=False)
     description = db.Column(db.String(300), nullable=False)
 
+
     # constructor for creating a restaurant
-    def __init__(self, name, address, phone_number, zip_code, image, cuisine, description):
+    def __init__(self, owner_id, name, address, phone_number, zip_code, image, cuisine, description):
+        self.owner_id = owner_id
         self.name = name
         self.address = address
         self.phone_number = phone_number
@@ -82,12 +105,12 @@ class Menu(db.Model):
 
 
 # method for adding a restaurant
-def create_restaurant(new_name, new_address, new_phone, new_zip, new_image, cuisine, description):
+def create_restaurant(owner_id, new_name, new_address, new_phone, new_zip, new_image, cuisine, description):
     # Create a restaurant with the provided input.
     # At first, we will trust the user.
 
     # This line maps to (the Restaurant.__init__ method)
-    restaurant = Restaurant(new_name, new_address, new_phone, new_zip, new_image, cuisine, description)
+    restaurant = Restaurant(owner_id, new_name, new_address, new_phone, new_zip, new_image, cuisine, description)
 
     # Actually add this restaurant to the database
     db.session.add(restaurant)
@@ -138,6 +161,8 @@ def search_menu():
     if request.method == "POST":
         restaurant_id = request.form['restaurant_id']
         restaurant_name = request.form['restaurant_name']
+        user_id = request.form['user_id']
+        user_name = request.form['user_name']
         result = Menu.query.filter_by(restaurant_id=restaurant_id).all()
         menus = [{
             "id": row.id,
@@ -145,7 +170,7 @@ def search_menu():
             "price": row.price,
             "quantity": row.quantity,
         } for row in result]
-        return render_template('menu.html', name=restaurant_name, id=restaurant_id, menus=menus)
+        return render_template('menu_for_user.html', name=restaurant_name, id=restaurant_id, user_name=user_name, user_id=user_id, menus=menus)
 
     elif request.method == "GET":
         restaurant_name, restaurant_id = request.args.get("name"), request.args.get("id", None)
@@ -186,6 +211,8 @@ def search_restaurant():
     if request.method == "POST":
         query = request.form['restaurant']
         cuisine = request.form['cuisine']
+        user_name = request.form['user_name']
+        user_id = request.form['user_id']
         if query:
             query = '%{}%'.format(query)
             result = db.session.query(Restaurant).filter(
@@ -226,7 +253,7 @@ def search_restaurant():
         } for row in result]
 
         # disabling cache
-        r = make_response(render_template('index.html', restaurants=restaurants))
+        r = make_response(render_template('index.html', restaurants=restaurants, user_name=user_name, user_id=user_id))
         r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
         r.headers["Pragma"] = "no-cache"
         r.headers["Expires"] = "0"
@@ -240,11 +267,28 @@ def search_restaurant():
     return r
 
 
+# endpoint for displaying restaurants
+@app.route('/show_restaurants', methods=['GET'])
+def show_restaurant():
+    owner_id = request.args.get('owner_id')
+    owner_name = request.args.get('owner_name')
+    result = db.session.query(Restaurant).filter(Restaurant.owner_id == owner_id)
+    restaurants = [{
+        "id": row.id,
+        "name": row.name,
+        "address": row.address,
+        "phone_number": row.phone_number,
+        "zip_code": row.zip_code,
+        "image": row.image,
+        "cuisine": row.cuisine,
+        "description": row.description
+    } for row in result]
+    return render_template('display_restaurant.html', restaurants=restaurants, owner=owner_name)
+
+
 # endpoint for adding a restaurant
-@app.route('/add', methods=['GET', 'POST'])
+@app.route('/add', methods=['POST'])
 def add_restaurant():
-    if request.method == 'GET':
-        return render_template('add_restaurant.html')
 
     # Because we 'returned' for a 'GET', if we get to this next bit, we must
     # have received a POST
@@ -261,6 +305,8 @@ def add_restaurant():
         file.save(file_path)
 
     # retrieve post form data by each field
+    owner_id = request.form.get('owner_id')
+    owner_name = request.form.get('owner_name')
     restaurant_name = request.form.get('name_field')
     restaurant_address = request.form.get('address_field')
     restaurant_phone = request.form.get('phone_field')
@@ -269,9 +315,9 @@ def add_restaurant():
     restaurant_description = request.form.get('description')
 
     # create a restaurant to be added
-    restaurant = create_restaurant(restaurant_name, restaurant_address, restaurant_phone,
+    restaurant = create_restaurant(owner_id, restaurant_name, restaurant_address, restaurant_phone,
                                    restaurant_zip, file_path, restaurant_cuisine, restaurant_description)
-    return render_template('add_restaurant.html', restaurant=restaurant)
+    return render_template('add_restaurant.html', restaurant=restaurant, owner_id=owner_id, owner_name=owner_name)
 
 
 # endpoint for deleting a restaurant
@@ -332,6 +378,8 @@ def add_entry():
     entry = create_entry(entry_name, entry_price, entry_quantity, restaurant_id)
     return render_template('add_entry.html', entry=entry, name=restaurant_name, id=restaurant_id)
 
+
+
 @app.route("/home.html")
 def home():
     return render_template("home.html", content="Testing")
@@ -340,29 +388,177 @@ def home():
 def about():
     return render_template("aboutus.html", content="Testing")
 
+@app.route("/jas.html")
+def jas():
+    return render_template("jas.html", content="Testing")
+
 @app.route("/regowner.html")
-def regowner():
+def owner():
     return render_template("regowner.html", content="Testing")
 
+@app.route("/loginowner.html")
+def logowner():
+    return render_template("loginowner.html", content="Testing")
+
 @app.route("/regdriver.html")
-def regdriver():
+def driver():
     return render_template("regdriver.html", content="Testing")
+
+@app.route("/logindriver.html")
+def logdriver():
+    return render_template("logindriver.html", content="Testing")
 
 @app.route("/regsf.html")
 def regsf():
     return render_template("regsf.html", content="Testing")
 
-@app.route("/loginsf.html")
-def logsf():
-    return render_template("loginsf.html", content="Testing")
 
-@app.route("/jas.html")
-def jas():
-    return render_template("jas.html", content="Testing")
+# endpoint for registering as a SFSU member
+@app.route("/register_sfsu", methods=['POST'])
+def register():
+    full_name = request.form['full_name']
+    email = request.form['email']
+    password = request.form['password']
+    password_repeat = request.form['password_repeat']
 
-@app.route("/nav-test")
-def nav():
-    return render_template("nav.html", content="Testing")
+    if password != password_repeat:
+        return render_template("regsf.html", failure="Passwords do not match")
+
+    result = db.session.query(User).filter(User.email == email)
+    user = [{
+        "name": row.name,
+        "email": row.email,
+        "password": row.password
+    } for row in result]
+
+    if len(user) != 0:
+        return render_template("regsf.html", failure="Email already registered")
+
+    db.session.add(User(full_name, email, generate_password_hash(password), 0))
+    db.session.commit()
+    return render_template("loginsf.html", success="Registration Successful")
+
+
+# endpoint for logging in as a SFSU member
+@app.route("/login_sfsu", methods=['GET','POST'])
+def login():
+    if request.method == 'GET':
+        return render_template("loginsf.html")
+
+    email = request.form['email']
+    password = request.form['password']
+    result = db.session.query(User).filter(User.email == email)
+
+    for row in result:
+        print(row)
+    user = [{
+        "id": row.id,
+        "name": row.name,
+        "email": row.email,
+        "password": row.password,
+        "user_type": row.user_type
+    } for row in result]
+
+    if len(user) == 0:
+        return render_template("loginsf.html", failure="No user found")
+    elif not check_password_hash(user[0]['password'], password):
+        return render_template("loginsf.html", failure="Incorrect password")
+    else:
+        if user[0]["user_type"] == 0:
+            return render_template("index.html", user_id=user[0]['id'], user_name=user[0]['name'])
+        elif user[0]["user_type"] == 1:
+            return render_template("add_restaurant.html", owner_id=user[0]['id'], owner_name=user[0]['name'])
+        elif user[0]["user_type"] == 2:
+            return render_template("vieworder.html")
+
+
+# endpoint for registering as a restaurant owner
+@app.route("/register_restaurant_owner", methods=['POST'])
+def register_restaurant_owner():
+    full_name = request.form['full_name']
+    email = request.form['email']
+    password = request.form['password']
+    password_repeat = request.form['password_repeat']
+
+    if password != password_repeat:
+        return render_template("regowner.html", failure="Passwords do not match")
+
+    result = db.session.query(User).filter(User.email == email)
+    user = [{
+        "name": row.name,
+        "email": row.email,
+        "password": row.password
+    } for row in result]
+
+    if len(user) != 0:
+        return render_template("regowner.html", failure="Email already registered")
+
+    db.session.add(User(full_name, email, generate_password_hash(password), 1))
+    db.session.commit()
+    return render_template("loginowner.html", success="Registration Successful")
+
+
+# endpoint for registering as a delivery driver
+@app.route("/register_delivery_driver", methods=['POST'])
+def register_delivery_driver():
+    full_name = request.form['full_name']
+    email = request.form['email']
+    password = request.form['password']
+    password_repeat = request.form['password_repeat']
+
+    if password != password_repeat:
+        return render_template("regdriver.html", failure="Passwords do not match")
+
+    result = db.session.query(User).filter(User.email == email)
+    user = [{
+        "name": row.name,
+        "email": row.email,
+        "password": row.password
+    } for row in result]
+
+    if len(user) != 0:
+        return render_template("regdriver.html", failure="Email already registered")
+
+    db.session.add(User(full_name, email, generate_password_hash(password), 2))
+    db.session.commit()
+    return render_template("logindriver.html", success="Registration Successful")
+
+
+# endpoint for adding menu items to cart
+@app.route("/cart", methods=['POST'])
+def cart():
+    menu_ids = request.form.getlist("menu_id[]")
+    menu_names = request.form.getlist("menu_name[]")
+    menu_prices = request.form.getlist("menu_price[]")
+    menu_quantities = request.form.getlist("menu_quantity[]")
+
+    restaurant_id = request.form["restaurant_id"]
+    restaurant_name = request.form["restaurant_name"]
+    user_id = request.form["user_id"]
+    user_name = request.form["user_name"]
+
+    order = list(filter(lambda x: x[-1] > 0, map(lambda x: (x[0], float(x[1]), int(x[2])), zip(menu_names, menu_prices, menu_quantities))))
+    total = 0 if len(order) == 0 else sum([p*q for n, p, q in order])
+    cart = [{"name": n, "price": p} for n, p, q in order]
+
+    return render_template("cart.html", restaurant_name=restaurant_name, cart=cart, total=total, user_id=user_id, user_name=user_name)
+
+
+# endpoint for checkout after adding items  to cart
+@app.route("/checkout", methods=['POST'])
+def checkout():
+    menu_names = request.form.getlist("name[]")
+    menu_prices = request.form.getlist("price[]")
+
+    total = request.form['total']
+    user_id = request.form['user_id']
+    user_name = request.form['user_name']
+
+    cart = list(map(lambda x: {'name': x[0], 'price': float(x[1])}, zip(menu_names, menu_prices)))
+    total = float(total)
+
+    return render_template("checkout.html", cart=cart, total=total, user_id=user_id, user_name=user_name)
+
 
 if __name__ == '__main__':
     app.debug = True

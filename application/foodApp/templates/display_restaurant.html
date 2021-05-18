@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>All Restaurants</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script>
+            var api_key = 'AIzaSyACO6dBtKF7trOPjjlHCp_L_dyY4jaZ61E'
+  </script>
+  <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyACO6dBtKF7trOPjjlHCp_L_dyY4jaZ61E&libraries=&v=weekly'></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/static/index.css">
+
+<style>
+    .map {
+        height: 300px;
+        width: 300px;
+        float: left
+    }
+    .restaurant {
+        height: 300px;
+        width: 300px;
+        float: left
+    }
+    .card {
+        width: 604px;
+        height: 435px;
+        position: relative;
+        margin: 0 auto;
+        margin-bottom: 80px;
+        box-shadow: 0 4px 6px 0 rgba(0,0,0,0.5)
+    }
+</style>
+
+</head>
+
+<body>
+
+{% if restaurants|length > 0 %}
+    <div style="overflow-y: scroll; height: 100%">
+        <p>Restaurants for {{ owner }}<p>
+    {% for restaurant in restaurants %}
+        <div class="card">
+            <div class="restaurant">
+                {% if restaurant.image != '' %}
+                    <img src="{{ restaurant.image }}" alt="{{ restaurant.name }} Image" width="300" height="300"><br>
+                {% else %}
+                    <img src="static/images/default.png" alt="{{ restaurant.name }} Image" width="300" height="300"><br>
+                {% endif %}
+                <b style="margin-left: 10px; font-size: 22px">{{ restaurant.name }}</b><span> · {{ restaurant.cuisine }}</span><br>
+                <b style="margin-left: 10px; font-size: 10px"></b><span>{{ restaurant.description }}</span><br>
+                <a style="margin-left: 10px" href="tel:{{ restaurant.phone_number }}">{{ restaurant.phone_number }}</a><br>
+                <b style="margin-left: 10px; font-size: 10px"></b><span>{{ restaurant.address }}</span><br>
+                <b style="margin-left: 10px; font-size: 10px"></b><span>{{ restaurant.zip_code }}</span><br>
+                <form style="margin-left: 10px" method="post" action="/menu">
+                    <input type="hidden" name="restaurant_id" value="{{ restaurant.id }}">
+                    <input type="hidden" name="restaurant_name" value="{{ restaurant.name }}">
+                    <button>Show Menu</button>
+                </form>
+            </div>
+            <div class="map" data-address="{{ restaurant.address }}" data-zip="{{ restaurant.zip_code }}"></div>
+        </div>
+    {% endfor %}
+    </p>
+{% endif %}
+
+</body>
+<script>
+    function load_map(map_element, address){
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${api_key}`).then(response => {
+            response.json().then(data => {
+                let place = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng}
+                let map = new google.maps.Map(map_element, { zoom: 12, center: place})
+                let marker = new google.maps.Marker({
+                    position: place,
+                    map: map
+                })
+            })
+        })
+    }
+    {% for restaurant in restaurants %}
+        load_map(document.getElementsByClassName("map")[{{ loop.index-1 }}], document.getElementsByClassName("map")[{{ loop.index-1 }}].dataset.address)
+    {% endfor %}
+</script>
+</html>
+
