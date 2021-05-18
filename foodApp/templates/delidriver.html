@@ -1,0 +1,163 @@
+{% extends 'nav.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Delivery Driver </title>
+        <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+      <script>
+            var api_key = 'AIzaSyACO6dBtKF7trOPjjlHCp_L_dyY4jaZ61E'
+      </script>
+      <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyACO6dBtKF7trOPjjlHCp_L_dyY4jaZ61E&libraries=&v=weekly'></script>
+
+    <style>
+        .map {
+            height: 600px;
+            width: 600px;
+        }
+        .navbar {
+          background-color: black;
+          margin-bottom: 0;
+          border-radius: 0;
+        }
+        header{
+            text-align: center;
+        }
+
+
+        body {
+            background-image: url("../static/leaf.jpg");
+            background-size: 1440px 800px;
+            font-family: 'Ubuntu', sans-serif;
+        }
+        a {
+          color: #2196F3;
+        }
+
+        hr {
+          border: 1px solid lightgrey;
+        }
+
+        input[type="text"], select, textarea {
+            width: 250%;
+            padding: 12px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        .container {
+            border-radius: 5px;
+            background-color: beige;
+            padding: 45px;
+        }
+
+        .col-25 {
+            float: left;
+            width: 25%;
+            margin-top: 6px;
+        }
+
+        .col-75 {
+            float: left;
+            width: 25%;
+            margin-top: 6px;
+        }
+
+
+    </style>
+
+</head>
+
+<center><h2>Delivery Information</h2></center>
+
+<div class="container">
+    <form action="/action_page.php">
+        <div class="row">
+            <div class="col-25">
+                <label for="restaurant_name">Restaurant Name</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="name" name="restaurant_name" placeholder="Restaurant Name" value="{{ restaurant_name }}">
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="pickup_information">Pickup Information</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="name" name="pickup_information" placeholder="Pickup Information" value="{{ mode }}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="customer_name">Customer Name</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="name" name="customer_name" placeholder="Customer Name" value="{{ user_name }}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="address">Address</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="name" name="address" placeholder="Address" value="{{ address }}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="order_number">Order Number</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="name" name="order_number" placeholder="Order Number" value="{{ order_id }}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label class="customer_location">Customer Location</label>
+            </div>
+
+            <div class="alignright">
+                <div class="map" data-address="{{ address }}"></div>
+            </div>
+
+        </div>
+        <div>
+            <input type="submit" value="Confirm Delivery"/>
+        </div>
+
+    </form>
+
+</div>
+<script>
+    function load_map(map_element, address){
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${api_key}`).then(response => {
+            response.json().then(data => {
+                let place = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng}
+                let map = new google.maps.Map(map_element, { zoom: 12, center: place})
+                let marker = new google.maps.Marker({
+                    position: place,
+                    map: map
+                })
+            })
+        })
+    }
+    load_map(document.getElementsByClassName("map")[0], document.getElementsByClassName("map")[0].dataset.address)
+</script>
+
+</html>
+{% endblock %}
