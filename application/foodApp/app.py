@@ -25,7 +25,7 @@ app.jinja_env.filters['quote_plus'] = lambda u: quote_plus(u)
 
 # for sqlalchemy
 DB_USER = 'root'
-DB_PASSWORD = ''
+DB_PASSWORD = 'Tinthuzaraye92!'
 DB_HOST = 'localhost'
 DB_PORT = 3306
 DB_NAME = 'DatabaseDB'
@@ -389,6 +389,9 @@ def regsf():
 def logsf():
     return render_template("loginsf.html", content="Testing")
 
+@app.route("/delidriver.html")
+def delidriver():
+    return render_template("delidriver.html", content="Testing")
 
 
 
