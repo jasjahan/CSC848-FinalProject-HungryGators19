@@ -1,32 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f64ca08a-b7a6-440d-9c51-f65fc656f894" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/addmenu.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/cart.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/checkout.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/logindriver.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/loginowner.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/mainmenu.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/restaurant.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/vieworder.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/aboutus.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/aboutus.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bran.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bran.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/gurjot.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/gurjot.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/jas.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/jas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/loginsf.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/loginsf.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/nav.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pan.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pan.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/regdriver.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/regdriver.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/regowner.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/regowner.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/regsf.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/regsf.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/rob.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rob.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/tin.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tin.html" afterDir="false" />
-    </list>
+    <list default="true" id="f64ca08a-b7a6-440d-9c51-f65fc656f894" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +11,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="ProjectId" id="1sSS5mAQ1T3UkRXQQKE5JaKnGIQ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -45,6 +21,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunManager">
     <configuration name="Flask (app.py)" type="Python.FlaskServer">
@@ -72,6 +49,7 @@
       <option name="presentableId" value="Default" />
       <updated>1620864317330</updated>
       <workItem from="1620864318591" duration="1086000" />
+      <workItem from="1621323534920" duration="2779000" />
     </task>
     <servers />
   </component>
@@ -79,6 +57,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/foodApp$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1620880606316" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/foodApp$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1621382817140" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
