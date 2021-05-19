@@ -1,0 +1,133 @@
+{% extends 'nav.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Restaurant Home Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+
+     .navbar {
+      background-color: black;
+      margin-bottom: 0;
+      border-radius: 0;
+      }
+
+      html{
+      height: 97vh;
+      }
+
+      header{
+    text-align: center;
+      overflow: hidden;
+  background-color: #f1f1f1;
+  }
+
+      body{
+        width: 100%;
+        height: 97vh;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        background-color: beige;
+        background-size: 1440px 800px;
+        font-family: 'Ubuntu', sans-serif;
+      }
+
+      .jumbotron{
+        background-image: url("/static/tin.png");
+        height: 300px;
+      }
+
+      .alignright {
+        float: right;
+      }
+
+
+    div.scrollmenu a {
+      display: inline-block;
+      color: black;
+      text-align: center;
+      padding: 14px;
+      text-decoration: none;
+    }
+
+    div.scrollmenu a:hover {
+      background-color: #777;
+    }
+  </style>
+</head>
+
+
+
+<body>
+  <div id="textbox">
+     <div class="alignright"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3155.8844307649847!2d-122.4807618849614!3d37.72239047976896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808f7db3d831cb0f%3A0xbf8ea9705a24d86b!2sSFSU%20Bookstore!5e0!3m2!1sen!2sus!4v1619650021542!5m2!1sen!2sus" width="500" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+     <div class="jumbotron" >
+          <div class="container text-center">
+              <h2>Cafe Shop</h2>
+              <p>American</p>
+          </div>
+     </div>
+  </div>
+
+    <div class="w3-bar">
+      <button class="w3-bar-item w3-button w3-teal" style="width:25%">Full Menu</button>
+      <button class="w3-bar-item w3-button w3-green" style="width:25%">Delivery Driver Info</button>
+      <button class="w3-bar-item w3-button w3-teal" style="width:25%">Checkout</button>
+      <button class="w3-bar-item w3-button w3-green" style="width:25%">About Us</button>
+    </div>
+
+
+  <div class="container-fluid bg-3 text-center">
+  <h3>Popular Items</h3><br>
+  <div class="column">
+        <div class="col-sm-3">
+           <p>Pasta</p>
+           <img src="/static/pasta.png" class="img-circle" height="100" width="100" alt="Avatar">
+        </div>
+
+       </div>
+            <div class="column">
+            <div class="col-sm-3">
+            <p>Strawberry Ice Cream</p>
+            <img src="/static/yogurt.jpg" class="img-circle" height="100" width="100" alt="Avatar">
+            </div>
+       </div>
+
+       <div class="column">
+        <div class="col-sm-3">
+           <p>Margarita Pizza</p>
+           <img src="/static/pizza.png" class="img-circle" height="100" width="100" alt="Avatar">
+        </div>
+      </div>
+
+        <div class="col-sm-3">
+          <div class="well">
+           <p>Try something new, or go with what you know, the choice is yours!</p>
+          </div>
+          <div class="well">
+           <p>Some of our most popular items offer the most tried and tested cuisine for you to eat at the click of a button.</p>
+          </div>
+        </div>
+  </div>
+  <hr>
+</div>
+
+
+</div><br>
+
+
+</body>
+
+</html>
+{% endblock %}

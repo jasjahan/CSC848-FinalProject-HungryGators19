@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-
+        scale=1">
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-
+        awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/static/index.css">
+    </head>
+    <header>
+        <a href="/add_entry?name={{ name }}&id={{ id }}">Add entry</a>
+        <a href="/">Main page</a>
+    </header>
+    <body>
+        <h1><center>Menu List for {{ name }}</center></h1>
+        <ul>
+        <form method="POST" action="/cart">
+            {% for menu in menus %}
+                <p>
+                    Entry: {{ menu.name }},
+                    Price: ${{ menu.price }},
+                    Quantity: {{ menu.quantity }}
+                    <input type="hidden" name="menu_id[]" value="{{ menu.id }}">
+                    <input type="hidden" name="menu_name[]" value="{{ menu.name }}">
+                    <input type="hidden" name="menu_price[]" value="{{ menu.price }}">
+                    <input type="number" name="menu_quantity[]" min="0" max="{{ menu.quantity }}" step="1" value="0">
+                </p>
+            {% endfor %}
+            <input type="hidden" name="restaurant_id" value="{{ id }}">
+            <input type="hidden" name="restaurant_name" value="{{ name }}">
+            <input type="hidden" name="user_id" value="{{ user_id }}">
+            <input type="hidden" name="user_name" value="{{ user_name }}">
+            <input type="submit" value="Checkout">
+        </form>
+        </ul>
+    </body>
+</html>
+
