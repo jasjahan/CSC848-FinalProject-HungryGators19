@@ -1,0 +1,207 @@
+{% extends 'nav.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <title>View Order Page - Restaurant Owner</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+
+  <style>
+    .navbar {
+      background-color: black;
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    header{
+    text-align: center;
+      overflow: hidden;
+  background-color: #f1f1f1;
+  }
+
+  body {
+
+        background-size: 1440px 800px;
+        background-color: floralwhite;
+        font-family: 'Ubuntu', sans-serif;
+   }
+
+
+ a {
+  color: #2196F3;
+}
+
+hr {
+  border: 1px solid lightgrey;
+}
+
+span.price {
+  float: right;
+  color: grey;
+}
+
+
+.col-75 {
+
+  width: 70%;
+  margin-top: 6px;
+}
+
+
+
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+
+   </style>
+
+</head>
+
+
+<body>
+
+<center> <h2> View Orders </h2></center>
+
+<div class="w3-container">
+  <h4><center>View Orders</center> </h4>
+
+
+  <table class="table">
+
+
+    <tr>
+      <th>Order Summary</th>
+      <th>Customer Information</th>
+      <th>Status</th>
+    </tr>
+
+
+    <tr>
+      <td>
+       <label for="subject">Order 1</label>
+          <div class="col-75">
+              <p><a href="#">Product 1</a> <span class="price">$15</span></p>
+              <p><a href="#">Product 2</a> <span class="price">$5</span></p>
+              <p><a href="#">Product 3</a> <span class="price">$8</span></p>
+              <p><a href="#">Product 4</a> <span class="price">$2</span></p><hr>
+              <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+          </div>
+       </td>
+
+       <td>
+          <li>Customer Name</li>
+          <li>Delivery Address</li>
+          <li>Phone NUmber</li>
+       </td>
+
+
+       <td>
+           <div class="w3-section">
+                <button class="w3-button w3-green">Accept</button>
+                <button class="w3-button w3-red">Decline</button>
+           </div>
+       </td>
+    </tr>
+
+
+
+    <tr>
+      <td>
+       <label for="subject">Order 2</label>
+          <div class="col-75">
+              <p><a href="#">Product 1</a> <span class="price">$15</span></p>
+              <p><a href="#">Product 2</a> <span class="price">$5</span></p>
+              <p><a href="#">Product 3</a> <span class="price">$8</span></p>
+              <p><a href="#">Product 4</a> <span class="price">$2</span></p><hr>
+              <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+          </div>
+       </td>
+
+       <td>
+          <li>Customer Name</li>
+          <li>Delivery Address</li>
+          <li>Phone NUmber</li>
+       </td>
+
+
+       <td>
+           <div class="w3-section">
+                <button class="w3-button w3-green">Accept</button>
+                <button class="w3-button w3-red">Decline</button>
+           </div>
+       </td>
+    </tr>
+
+
+
+    <tr>
+      <td>
+       <label for="subject">Order 3</label>
+          <div class="col-75">
+              <p><a href="#">Product 1</a> <span class="price">$15</span></p>
+              <p><a href="#">Product 2</a> <span class="price">$5</span></p>
+              <p><a href="#">Product 3</a> <span class="price">$8</span></p>
+              <p><a href="#">Product 4</a> <span class="price">$2</span></p><hr>
+              <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+          </div>
+       </td>
+
+       <td>
+          <li>Customer Name</li>
+          <li>Delivery Address</li>
+          <li>Phone NUmber</li>
+       </td>
+
+
+       <td>
+           <div class="w3-section">
+                <button class="w3-button w3-green">Accept</button>
+                <button class="w3-button w3-red">Decline</button>
+           </div>
+       </td>
+    </tr>
+  </table>
+</div>
+
+
+
+</body>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'nav.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Restaurant Owner Profile</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+
+        .navbar {
+      background-color: black;
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    html{
+      height: 97vh;
+    }
+
+    header{
+    text-align: center;
+      overflow: hidden;
+  background-color: #f1f1f1;
+  }
+
+    body{
+        background-image: url("/static/back.png");
+        width: 100%;
+        height: 97vh;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+    }
+
+    .container {
+       width: 1000px;
+       height: 600px;
+      padding-top: 100px;
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      }
+
+  </style>
+</head>
+
+
+<body>
+
+<div class="container">
+  <div class="w3-card-4 w3-sand w3-center" style="width:100%">
+
+    <div class="w3-container w3-center">
+      <h3>Cafe Shop</h3>
+      <img src="/static/pro.png" alt="Image" style="width:200px;height:200px;">
+      <h5> Aria Stark </h5>
+
+     <div class="w3-center">
+
+         <div class="w3-section">
+             <button class="w3-bar-item w3-button w3-green" style="width:25%"><a href="vieworder.html">View Orders</a></button>
+                <button class="w3-bar-item w3-button w3-green" style="width:25%">Contact Delivery Driver</button>
+         </div>
+
+         <div class="w3-section">
+             <button class="w3-bar-item w3-button w3-teal" style="width:25%"><a href="addmenu.html">Add Menu</a></button>
+                <button class="w3-bar-item w3-button w3-teal" style="width:25%">Delete Menu</button>
+         </div>
+     </div>
+    </div>
+  </div>
+
+</div>
+
+
+</body>
+</html>
+{% endblock %}
