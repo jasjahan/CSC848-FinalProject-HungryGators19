@@ -1,7 +1,0 @@
-{
- idrestaurant: 1,
- address: "123 dummy lane",
- phone_number: "1234",
- zip_code: "3521",
-}
-
