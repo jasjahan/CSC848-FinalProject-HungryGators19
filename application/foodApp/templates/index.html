@@ -1,3 +1,6 @@
+{% extends 'nav.html' %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,6 +43,12 @@
       height: 97vh;
   }
 
+  header{
+    text-align: center;
+      overflow: hidden;
+    background-color: #f1f1f1;
+  }
+
 
 
   body{
@@ -68,15 +77,6 @@
     min-height: 300px;
    }
 
-  .footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background-color: beige;
-   color: black;
-   text-align: center;
-   }
 
   .carousel-inner img {
       width: 100%; /* Set width to 100% */
@@ -94,58 +94,62 @@
 
   </style>
 </head>
-
 <body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Logo</a>
-      <a class="navbar-brand" href="/">HungryGators-19</a>
-
-    </div>
-
-    <ul class="nav navbar-nav">
-
-        <form class="navbar-form navbar-left" action="/" method="post">
-            <li class="dropdown" style="float: left"><a class="dropdown-toggle" data-toggle="dropdown" href="#">All Cuisine<span class="caret"></span></a>
-                    <ul class="dropdown-menu" id="cuisine-menu">
-                        <li><a href="#">American</a></li>
-                        <li><a href="#">Asian</a></li>
-                        <li><a href="#">European</a></li>
-                        <li><a href="#">African</a></li>
-                    </ul>
-            </li>
-            <input type="hidden" name="cuisine" id="cuisine" value="">
-            <input type="hidden" name="user_name" value="{{ user_name }}">
-            <input type="hidden" name="user_id" value="{{ user_id }}">
-           <div class="form-group">
-                <input type="text" class="form-control" style="width: 300px; height: 34px" placeholder="Search by Restaurants" name="restaurant">
-           </div> 
-           <button type="submit" class="btn btn-default">Search</button>
-        </form>
-    </ul>
-    <script type="text/javascript">
-        $(document).ready(function (){
-            $("#cuisine-menu > li > a").click(function (){
-                // console.log($(this).text())
-                $("input[id=cuisine]").val($(this).text().toLowerCase())
-            })
-        })
-    </script>
-
-
-      <ul class="nav navbar-nav navbar-right">
-          <li><a href="aboutus.html"><span class=""></span> About </a></li>
-          <li><a href="regowner.html"><span class=""></span> Restaurant Owner</a></li>
-          <li><a href="regdriver.html"><span class=""></span> Delivery Driver</a></li>
-          <li><a href="regsf.html"><span class="glyphicon glyphicon-user"></span>Register</a></li>
-          <li><a href="/login_sfsu"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-      </ul>
-
-  </div>
-</nav>
+{#<nav class="navbar navbar-inverse">#}
+{#  <div class="container-fluid">#}
+{#    <div class="navbar-header">#}
+{#       <a class="navbar-brand"><img src="/static/logo.jpg" alt="logo" style="width:50px;height:35px;"></a>#}
+{#      <a class="navbar-brand" href="/">HungryGators-19</a>#}
+{##}
+{#    </div>#}
+{##}
+{#    <ul class="nav navbar-nav">#}
+{##}
+{#        <form class="navbar-form navbar-left" action="/" method="post">#}
+{#            <li class="dropdown" style="float: left"><a class="dropdown-toggle" data-toggle="dropdown" href="#">All Cuisine<span class="caret"></span></a>#}
+{#                    <ul class="dropdown-menu" id="cuisine-menu">#}
+{#                        <li><a href="#">American</a></li>#}
+{#                        <li><a href="#">Asian</a></li>#}
+{#                        <li><a href="#">European</a></li>#}
+{#                        <li><a href="#">African</a></li>#}
+{#                    </ul>#}
+{#            </li>#}
+{#            <input type="hidden" name="cuisine" id="cuisine" value="">#}
+{#            <input type="hidden" name="user_name" value="{{ user_name }}">#}
+{#            <input type="hidden" name="user_id" value="{{ user_id }}">#}
+{#           <div class="form-group">#}
+{#                <input maxlength="40" type="text" class="form-control" style="width: 300px; height: 34px" placeholder="Search by Restaurants" name="restaurant" value="{{ query if query else '' }}">#}
+{#           </div>#}
+{#           <button type="submit" class="btn btn-default">Search</button>#}
+{#        </form>#}
+{#    </ul>#}
+{##}
+{##}
+{##}
+{#      <ul class="nav navbar-nav navbar-right">#}
+{#          <li><a href="aboutus.html"><span class=""></span> About </a></li>#}
+{#          <li><a href="regowner.html"><span class=""></span> Restaurant Owner</a></li>#}
+{#          <li><a href="regdriver.html"><span class=""></span> Delivery Driver</a></li>#}
+{#          <li><a href="regadmin.html"><span class=""></span> Admin </a></li>#}
+{#          <li><a href="regsf.html"><span class="glyphicon glyphicon-user"></span>Register</a></li>#}
+{#          <li><a href="/login_sfsu"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>#}
+{#      </ul>#}
+{##}
+{#      <script type="text/javascript">#}
+{#         $(document).ready(function (){#}
+{#            $("#cuisine-menu > li > a").click(function (){#}
+{#                // console.log($(this).text())#}
+{#                $("input[id=cuisine]").val($(this).text().toLowerCase())#}
+{#                $(".dropdown .dropdown-toggle").html($(this).text() + '<span class="caret"></span>')#}
+{#            })#}
+{#        })#}
+{#    </script>#}
+{##}
+{#  </div>#}
+{#</nav>#}
 
 {% if restaurants|length > 0 %}
+    <p style="text-align: center">{{restaurants|length}} restaurant(s) found</p>
     <div style="overflow-y: scroll; height: 100%">
     {% for restaurant in restaurants %}
         <div class="card">
@@ -159,7 +163,7 @@
                 <b style="margin-left: 10px; font-size: 10px"></b><span>{{ restaurant.description }}</span><br>
                 <a style="margin-left: 10px" href="tel:{{ restaurant.phone_number }}">{{ restaurant.phone_number }}</a><br>
                 <b style="margin-left: 10px; font-size: 10px"></b><span>{{ restaurant.address }}</span><br>
-                <b style="margin-left: 10px; font-size: 10px"></b><span>{{ restaurant.zip_code }}</span><br>
+                <b style="margin-left: 10px; font-size: 10px"></b><span>{{ restaurant.price_tag }}</span><br>
                 <form style="margin-left: 10px" method="post" action="/menu">
                     <input type="hidden" name="restaurant_id" value="{{ restaurant.id }}">
                     <input type="hidden" name="restaurant_name" value="{{ restaurant.name }}">
@@ -277,4 +281,5 @@
     {% endfor %}
 </script>
 </html>
+{%  endblock %}
 

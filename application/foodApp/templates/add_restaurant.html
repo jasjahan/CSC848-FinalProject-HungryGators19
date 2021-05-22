@@ -1,3 +1,5 @@
+{% extends 'nav.html' %}
+{% block content %}
 <h3>Add Restaurant</h3>
 <p><a href="/show_restaurants?owner_id={{ owner_id }}&owner_name={{ owner_name }}">Show all restaurants</a></p>
 
@@ -29,6 +31,9 @@
     <label for="description_id">Description</label>
     <input id="description_id" name="description" type="text"/></br>
 
+    <label for="price_tag">Price Tag</label>
+    <input id="price_tag" name="price_tag" type="text" placeholder="$$$$$"/></br>
+
     <label for="cuisine_id">Select a cuisine:</label>
     <input type="radio" id="american" name="cuisine" value="american"
          checked>
@@ -49,3 +54,4 @@
 	<input type="submit" value="Add"/>
 
 </form>
+{% endblock %}

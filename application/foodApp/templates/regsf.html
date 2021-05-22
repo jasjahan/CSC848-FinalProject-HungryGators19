@@ -1,3 +1,5 @@
+{% extends 'nav.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,8 +17,10 @@
     html{
       height: 97vh;
   }
-  header{
+    header{
     text-align: center;
+      overflow: hidden;
+  background-color: #f1f1f1;
   }
   body{
     width: 100%;
@@ -143,7 +147,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="static/logo.png">Logo</a>
+      <a class="navbar-brand"><img src="/static/logo.png" alt="logo" style="width:50px;height:35px;"></a>
       <a class="navbar-brand" href="/">HungryGators-19</a>
 
     </div>
@@ -170,7 +174,7 @@
           <li><a href="/"><span class=""></span> About </a></li>
           <li><a href="regowner.html"><span class=""></span> Restaurant Owner</a></li>
           <li><a href="regdriver.html"><span class=""></span> Delivery Driver</a></li>
-          <li><a href="regsf.html"><span class="glyphicon glyphicon-user"></span>Register</a></li>
+          <li><a href="regadmin.html"><span class=""></span> Admin </a></li>
           <li><a href="/login_sfsu"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
       </ul>
   </div>
@@ -185,10 +189,10 @@
     <p class="sign" align="center">SFSU Student|Faculty|Staff</p>
 
     <form class="form3" method="post" action="/register_sfsu">
-      <input class="un " type="text" align="center" placeholder="Full name" name="full_name">
-      <input class="pass" type="text" align="center" placeholder=" SFSU Email(Username)" name="email">
-      <input class="pass" type="password" align="center" placeholder="Create a Password" name="password">
-      <input class="pass" type="password" align="center" placeholder="Confirm Password" name="password_repeat">
+      <input class="un " type="text" align="center" placeholder="Full name" name="full_name"required>
+      <input  class = "un" type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@sfsu+\.edu$" align="center" placeholder=" SFSU Email(Username)" required>
+      <input class="pass" type="password" align="center" placeholder="Create a Password" name="password" required>
+      <input class="pass" type="password" align="center" placeholder="Confirm Password" name="password_repeat" required>
 
       <center><input class="term" type="checkbox" id="term">
       <label for="term"> I accept the Terms and Conditions.</label><br></center>

@@ -1,5 +1,10 @@
 <!doctype html>
 <html>
+<header>
+    <div class="header">
+        <p> SFSU Software Engineering Project CSC 648-848, Spring 2021 For Demonstration Only </p>
+    </div>
+</header>
     <head>
         <meta charset="utf-8"/>
         <title>{% block title %} HungryGators-19 {% endblock %}</title>
@@ -14,31 +19,47 @@
 
     </div>
 
-    <ul class="nav navbar-nav">
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> All Cuisine <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">American</a></li>
-          <li><a href="#">Mexican</a></li>
-          <li><a href="#">Italian</a></li>
-        </ul>
-      </li>
-
-        <form class="navbar-form navbar-left" action="/action_page.php" >
+      <form class="navbar-form navbar-left" action="/" method="post">
+            <li class="dropdown" style="float: left"><a class="dropdown-toggle" data-toggle="dropdown" href="#">All Cuisine<span class="caret"></span></a>
+                    <ul class="dropdown-menu" id="cuisine-menu">
+                        <li><a href="#">American</a></li>
+                        <li><a href="#">Asian</a></li>
+                        <li><a href="#">European</a></li>
+                        <li><a href="#">African</a></li>
+                    </ul>
+            </li>
+            <input type="hidden" name="cuisine" id="cuisine" value="">
+            <input type="hidden" name="user_name" value="{{ user_name }}">
+            <input type="hidden" name="user_id" value="{{ user_id }}">
            <div class="form-group">
-                <input type="text" class="form-control" style="width: 300px; height: 34px" placeholder="Search by Restaurants">
+                <input maxlength="40" type="text" class="form-control" style="width: 300px; height: 34px" placeholder="Search by Restaurants" name="restaurant" value="{{ query if query else '' }}">
            </div>
-                <button type="submit" class="btn btn-default">Search</button>
+           <button type="submit" class="btn btn-default">Search</button>
         </form>
-    </ul>
 
-
-      <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right">
           <li><a href="aboutus.html"><span class=""></span> About </a></li>
           <li><a href="regowner.html"><span class=""></span> Restaurant Owner</a></li>
           <li><a href="regdriver.html"><span class=""></span> Delivery Driver</a></li>
+          <li><a href="regadmin.html"><span class=""></span> Admin </a></li>
           <li><a href="regsf.html"><span class="glyphicon glyphicon-user"></span>Register</a></li>
           <li><a href="/login_sfsu"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
       </ul>
+
+      <script type="text/javascript">
+         $(document).ready(function (){
+            $("#cuisine-menu > li > a").click(function (){
+                // console.log($(this).text())
+                $("input[id=cuisine]").val($(this).text().toLowerCase())
+                $(".dropdown .dropdown-toggle").html($(this).text() + '<span class="caret"></span>')
+            })
+        })
+    </script>
+
+
+
+
+
 
   </div>
 </nav>

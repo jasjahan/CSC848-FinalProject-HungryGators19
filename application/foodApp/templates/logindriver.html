@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
     <style>
        .navbar {
       background-color: black;
@@ -23,17 +22,18 @@
       height: 97vh;
   }
 
+   header{
+    text-align: center;
+      overflow: hidden;
+    background-color: #f1f1f1;
+  }
+
   body{
     width: 100%;
     height: 97vh;
     position: fixed;
     top: 0;
     bottom: 0;
-  }
-  header{
-    text-align: center;
-      overflow: hidden;
-  background-color: #f1f1f1;
   }
    body {
         background-image: url('/static/reg.png');
@@ -152,13 +152,12 @@
   <div class="main">
     <p class="sign" align="center">Log In</p>
     <p class="sign" align="center">Delivery Driver</p>
-
-    <form class="form3">
+    <form class="form3" method="post" action="/login_sfsu">
       <input class="un " type="text" align="center" placeholder="SFSU Email">
       <input class="pass" type="password" align="center" placeholder="Password">
       <a class="submit" align="center"> Login </a>
       <p class="forgot" align="center"><a href="#">Forgot Password? </a></p>
-              <center><p><a href="regdriver.html" align="center">Are you new? Register here!</a></p></center>
+        <center><p><a href="regdriver.html" align="center">Are you new? Register here!</a></p></center>
 
     </form>
   </div>

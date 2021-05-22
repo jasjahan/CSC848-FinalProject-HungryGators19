@@ -11,7 +11,17 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+      <script>
+            var api_key = 'AIzaSyACO6dBtKF7trOPjjlHCp_L_dyY4jaZ61E'
+      </script>
+      <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyACO6dBtKF7trOPjjlHCp_L_dyY4jaZ61E&libraries=&v=weekly'></script>
+
     <style>
+        .map {
+            height: 600px;
+            width: 600px;
+        }
         .navbar {
           background-color: black;
           margin-bottom: 0;
@@ -19,9 +29,9 @@
         }
         header{
         text-align: center;
-      overflow: hidden;
-  background-color: #f1f1f1;
-        }
+        overflow: hidden;
+        background-color: #f1f1f1;
+    }
 
 
         body {
@@ -77,7 +87,7 @@
                 <label for="restaurant_name">Restaurant Name</label>
             </div>
             <div class="col-75">
-                <input type="text" id="name" name="restaurant_name" placeholder="Restaurant Name">
+                <input type="text" id="name" name="restaurant_name" placeholder="Restaurant Name" value="{{ restaurant_name }}">
             </div>
 
         </div>
@@ -87,7 +97,7 @@
                 <label for="pickup_information">Pickup Information</label>
             </div>
             <div class="col-75">
-                <input type="text" id="name" name="pickup_information" placeholder="Pickup Information">
+                <input type="text" id="name" name="pickup_information" placeholder="Pickup Information" value="{{ mode }}">
             </div>
         </div>
 
@@ -96,7 +106,7 @@
                 <label for="customer_name">Customer Name</label>
             </div>
             <div class="col-75">
-                <input type="text" id="name" name="customer_name" placeholder="Customer Name">
+                <input type="text" id="name" name="customer_name" placeholder="Customer Name" value="{{ user_name }}">
             </div>
         </div>
 
@@ -105,7 +115,7 @@
                 <label for="address">Address</label>
             </div>
             <div class="col-75">
-                <input type="text" id="name" name="address" placeholder="Address">
+                <input type="text" id="name" name="address" placeholder="Address" value="{{ address }}">
             </div>
         </div>
 
@@ -114,7 +124,7 @@
                 <label for="order_number">Order Number</label>
             </div>
             <div class="col-75">
-                <input type="text" id="name" name="order_number" placeholder="Order Number">
+                <input type="text" id="name" name="order_number" placeholder="Order Number" value="{{ order_id }}">
             </div>
         </div>
 
@@ -123,15 +133,30 @@
                 <label class="customer_location">Customer Location</label>
             </div>
 
-                <div class="alignright">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3155.8844307649847!2d-122.4807618849614!3d37.72239047976896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808f7db3d831cb0f%3A0xbf8ea9705a24d86b!2sSFSU%20Bookstore!5e0!3m2!1sen!2sus!4v1619650021542!5m2!1sen!2sus" width="1000" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
+            <div class="alignright">
+                <div class="map" data-address="{{ address }}"></div>
+            </div>
 
         </div>
 
     </form>
 
 </div>
+<script>
+    function load_map(map_element, address){
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${api_key}`).then(response => {
+            response.json().then(data => {
+                let place = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng}
+                let map = new google.maps.Map(map_element, { zoom: 12, center: place})
+                let marker = new google.maps.Marker({
+                    position: place,
+                    map: map
+                })
+            })
+        })
+    }
+    load_map(document.getElementsByClassName("map")[0], document.getElementsByClassName("map")[0].dataset.address)
+</script>
 
 </html>
 {% endblock %}
