@@ -23,7 +23,7 @@
       border-radius: 0;
     }
 
-    header{
+      header{
     text-align: center;
       overflow: hidden;
   background-color: #f1f1f1;
@@ -111,96 +111,60 @@ input[type=submit]:hover {
     </tr>
 
 
-    <tr>
-      <td>
-       <label for="subject">Order 1</label>
-          <div class="col-75">
-              <p><a href="#">Product 1</a> <span class="price">$15</span></p>
-              <p><a href="#">Product 2</a> <span class="price">$5</span></p>
-              <p><a href="#">Product 3</a> <span class="price">$8</span></p>
-              <p><a href="#">Product 4</a> <span class="price">$2</span></p><hr>
-              <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
-          </div>
-       </td>
+      {% for order in orders %}
+        <tr>
+          <td>
+           <label for="subject">Order {{ order['order_id'] }}</label>
+              <div class="col-75">
+                {% for item in order['items'] %}
+                  <p><a href="#">{{ item['name'] }}</a> <span class="price">${{ item['price'] }}</span></p>
+                {% endfor %}
+                <p>Total <span class="price" style="color:black"><b>${{ order['total'] }}</b></span></p>
+              </div>
+           </td>
 
-       <td>
-          <li>Customer Name</li>
-          <li>Delivery Address</li>
-          <li>Phone NUmber</li>
-       </td>
-
-
-       <td>
-           <div class="w3-section">
-                <button class="w3-button w3-green">Accept</button>
-                <button class="w3-button w3-red">Decline</button>
-           </div>
-       </td>
-    </tr>
+           <td>
+              <li>{{ order['user_name'] }}</li>
+              <li>{{ order['address'] }}</li>
+              <li>{{ order['phone_number'] }}</li>
+           </td>
 
 
+           <td>
+               <div class="w3-section">
+                    <form method='post', action='/confirm_delivery'>
+                      <input type="hidden" name="order_id" value="{{ order['order_id'] }}">
+                        <input type="hidden" name="user_id" value="{{ order['user_id'] }}">
+                      <input type="hidden" name="driver_id" value="{{ driver_id }}">
+                      <input type="hidden" name="driver_name" value="{{ driver_name }}">
+                      <input type="hidden" name="delivery_mode" value="{{ order['mode'] }}">
 
-    <tr>
-      <td>
-       <label for="subject">Order 2</label>
-          <div class="col-75">
-              <p><a href="#">Product 1</a> <span class="price">$15</span></p>
-              <p><a href="#">Product 2</a> <span class="price">$5</span></p>
-              <p><a href="#">Product 3</a> <span class="price">$8</span></p>
-              <p><a href="#">Product 4</a> <span class="price">$2</span></p><hr>
-              <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
-          </div>
-       </td>
+                      <input type="hidden" name="user_name" value="{{ order['user_name'] }}">
+                      <input type="hidden" name="address" value="{{ order['address'] }}">
+                      <input type="hidden" name="restaurant_name" value="{{ order['restaurant_name'] }}">
 
-       <td>
-          <li>Customer Name</li>
-          <li>Delivery Address</li>
-          <li>Phone NUmber</li>
-       </td>
-
-
-       <td>
-           <div class="w3-section">
-                <button class="w3-button w3-green">Accept</button>
-                <button class="w3-button w3-red">Decline</button>
-           </div>
-       </td>
-    </tr>
+                      <input type='submit' value='Accept' class="w3-button w3-green">
+                      <!-- <button class="w3-button w3-red">Decline</button> -->
+                    </form>
+               </div>
+           </td>
+        </tr>
+      {% endfor %}
 
 
 
-    <tr>
-      <td>
-       <label for="subject">Order 3</label>
-          <div class="col-75">
-              <p><a href="#">Product 1</a> <span class="price">$15</span></p>
-              <p><a href="#">Product 2</a> <span class="price">$5</span></p>
-              <p><a href="#">Product 3</a> <span class="price">$8</span></p>
-              <p><a href="#">Product 4</a> <span class="price">$2</span></p><hr>
-              <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
-          </div>
-       </td>
-
-       <td>
-          <li>Customer Name</li>
-          <li>Delivery Address</li>
-          <li>Phone NUmber</li>
-       </td>
 
 
-       <td>
-           <div class="w3-section">
-                <button class="w3-button w3-green">Accept</button>
-                <button class="w3-button w3-red">Decline</button>
-           </div>
-       </td>
-    </tr>
+
+
+
+
+
+
   </table>
 </div>
 
 
-
-</body>
 
 </body>
 </html>

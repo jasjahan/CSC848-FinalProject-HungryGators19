@@ -1,0 +1,31 @@
+<h3>(De)Activate Menu</h3>
+
+<table>
+    <tr>
+      <th>Item Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Restaurant Name</th>
+      <th>Cuisine</th>
+      <th>(De)Activate</th>
+    </tr>
+    {% for menu in menus %}
+      <tr>
+        <td>{{ menu['name'] }}</td>
+        <td>{{ menu['price'] }}</td>
+        <td>{{ menu['quantity'] }}</td>
+        <td>{{ menu['restaurant_name'] }}</td>
+        <td>{{ menu['cuisine'] }}</td>
+        <td>
+          <form method='post' action='/activate_menu'>
+            <input type='hidden' name='id' value="{{ menu['id'] }}">
+            {% if menu['is_active'] %}
+              <input name='is_active' type='checkbox' checked onChange="this.form.submit()">
+            {% else %}
+              <input name='is_active' type='checkbox' onChange="this.form.submit()">
+            {% endif %}
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+</table>

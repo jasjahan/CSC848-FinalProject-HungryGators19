@@ -21,6 +21,12 @@
       height: 97vh;
   }
 
+   header{
+    text-align: center;
+      overflow: hidden;
+    background-color: #f1f1f1;
+  }
+
   header{
     text-align: center;
   }
@@ -151,7 +157,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="static/logo.png">Logo</a>
+      <a class="navbar-brand"><img src="/static/logo.png" alt="logo" style="width:50px;height:35px;"></a>
       <a class="navbar-brand" href="/">HungryGators-19</a>
 
     </div>
@@ -190,7 +196,7 @@
 <body>
   <div class="main">
     <p class="sign" align="center">Log In</p>
-    <p class="sign" align="center">SFSU Student|Faculty|Staff</p>
+    <p class="sign" align="center">SFSU Member|Admin|Owner|Driver</p>
 
     <form class="form3" method="post" action="/login_sfsu">
       <input class="un " type="text" align="center" placeholder="SFSU Email" name="email">
