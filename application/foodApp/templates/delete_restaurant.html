@@ -1,3 +1,5 @@
+{% extends 'nav.html' %}
+{% block content %}
 <h3>Delete Restaurant (delete by entering the name and click on "delete")</h3>
 
 {% if deleted %}
@@ -28,3 +30,5 @@
         </center>
     {% endfor %}
 </ul>
+
+{% endblock %}
