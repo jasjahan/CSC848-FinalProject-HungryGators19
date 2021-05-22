@@ -316,6 +316,8 @@ def show_restaurant():
     } for row in result]
     return render_template('display_restaurant.html', restaurants=restaurants, owner_id=owner_id, owner=owner_name)
 
+
+# endpoint for deleting restaurants
 @app.route('/delete_restaurant', methods=['GET'])
 def delete_restaurant():
     restaurant_id = request.args.get('id')
@@ -566,7 +568,6 @@ def login():
             return render_template("activate_menu.html", menus=menus, admin_id=user[0]['id'], admin_name=user[0]['name'])
 
 
-
 # endpoint for registering as a restaurant owner
 @app.route("/register_restaurant_owner", methods=['POST'])
 def register_restaurant_owner():
@@ -618,6 +619,7 @@ def register_delivery_driver():
     db.session.commit()
     return render_template("loginsf.html", success="Registration Successful")
 
+
 # endpoint for registering as the admin
 @app.route("/register_admin", methods=['POST'])
 def register_admin():
@@ -641,7 +643,7 @@ def register_admin():
 
     db.session.add(User(full_name, email, generate_password_hash(password), 3))
     db.session.commit()
-    return render_template("loginadmin.html", success="Registration Successful")
+    return render_template("loginsf.html", success="Registration Successful")
 
 
 # endpoint for adding menu items to cart
@@ -705,6 +707,7 @@ def add_active_order():
     return render_template("index.html", user_name=user_name, user_id=user_id)
 
 
+# endpoint for confirming delivery
 @app.route("/confirm_delivery", methods=['POST'])
 def confirm_delivery():
     order_id = request.form["order_id"]
@@ -724,6 +727,7 @@ def confirm_delivery():
     return render_template("delidriver.html", user_name=user_name, restaurant_name=restaurant_name, address=address, mode=mode, order_id=order_id)
 
 
+# endpoint for admin to approve a menu item to be displayed
 @app.route("/activate_menu", methods=['POST'])
 def activate_menu():
     menu_id = request.form["id"]
