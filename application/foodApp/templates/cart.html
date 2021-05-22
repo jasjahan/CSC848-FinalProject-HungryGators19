@@ -30,7 +30,7 @@
   header{
     text-align: center;
       overflow: hidden;
-  background-color: #f1f1f1;
+    background-color: #f1f1f1;
   }
  a {
   color: #2196F3;
@@ -98,27 +98,33 @@ input[type=submit]:hover {
 
 <body>
 
-
-<h1>     </h1>
-
 <div class="container">
-    <center> <h2> Food Cart </h2></center>
-  <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>4</b></span></h4>
-      <p><a href="#">Product 1</a> <span class="price">$15</span></p>
-      <p><a href="#">Product 2</a> <span class="price">$5</span></p>
-      <p><a href="#">Product 3</a> <span class="price">$8</span></p>
-      <p><a href="#">Product 4</a> <span class="price">$2</span></p>
+    <center> <h2> Food Cart for {{ restaurant_name }}</h2></center>
+    <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>{{ cart|length }}</b></span></h4>
+      {% for item in cart %}
+         <p>{{ item["name"] }}<span class="price">${{ item["price"] }}</span></p>
+      {% endfor %}
       <hr>
-      <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
-    <div class="row">
-        <input type="submit" value="Continue to Checkout" >
+      <p>Total <span class="price" style="color:black"><b>${{ total }}</b></span></p>
+      <div class="row">
+         <form method="POST" action="/checkout">
+            <input type="hidden" name="restaurant_name" value="{{ restaurant_name }}">
+             <input type="hidden" name="user_id" value="{{ user_id }}">
+            <input type="hidden" name="user_name" value="{{ user_name }}">
+             <input type="hidden" name="total" value="{{ total }}">
+             {% for item in cart %}
+                 <input type="hidden" name="name[]" value="{{ item["name"] }}">
+                <input type="hidden" name="price[]" value="{{ item["price"] }}">
+             {% endfor %}
+            <input type="submit" value="Continue to Checkout" >
+         </form>
       </div>
 
   </div>
 
 
 
-</form>
+
 </div>
 
 </body>
