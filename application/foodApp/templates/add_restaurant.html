@@ -1,3 +1,5 @@
+{% extends 'nav.html' %}
+{% block content %}
 <h3>Add Restaurant</h3>
 <p><a href="/show_restaurants?owner_id={{ owner_id }}&owner_name={{ owner_name }}">Show all restaurants</a></p>
 
@@ -49,3 +51,4 @@
 	<input type="submit" value="Add"/>
 
 </form>
+{% endblock %}

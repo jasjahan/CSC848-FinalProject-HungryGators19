@@ -418,6 +418,26 @@ def about():
 def jas():
     return render_template("jas.html", content="Testing")
 
+@app.route("/bran.html")
+def bran():
+    return render_template("bran.html", content="Testing")
+
+@app.route("/rob.html")
+def rob():
+    return render_template("rob.html", content="Testing")
+
+@app.route("/gurjot.html")
+def gur():
+    return render_template("gurjot.html", content="Testing")
+
+@app.route("/tin.html")
+def tin():
+    return render_template("tin.html", content="Testing")
+
+@app.route("/pan.html")
+def pan():
+    return render_template("pan.html", content="Testing")
+
 @app.route("/regowner.html")
 def owner():
     return render_template("regowner.html", content="Testing")

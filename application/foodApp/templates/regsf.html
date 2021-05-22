@@ -1,3 +1,5 @@
+{% extends 'nav.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -185,10 +187,10 @@
     <p class="sign" align="center">SFSU Student|Faculty|Staff</p>
 
     <form class="form3" method="post" action="/register_sfsu">
-      <input class="un " type="text" align="center" placeholder="Full name" name="full_name">
-      <input class="pass" type="text" align="center" placeholder=" SFSU Email(Username)" name="email">
-      <input class="pass" type="password" align="center" placeholder="Create a Password" name="password">
-      <input class="pass" type="password" align="center" placeholder="Confirm Password" name="password_repeat">
+      <input class="un " type="text" align="center" placeholder="Full name" name="full_name"required>
+      <input  class = "un" type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@sfsu+\.edu$" align="center" placeholder=" SFSU Email(Username)" required>
+      <input class="pass" type="password" align="center" placeholder="Create a Password" name="password" required>
+      <input class="pass" type="password" align="center" placeholder="Confirm Password" name="password_repeat" required>
 
       <center><input class="term" type="checkbox" id="term">
       <label for="term"> I accept the Terms and Conditions.</label><br></center>
